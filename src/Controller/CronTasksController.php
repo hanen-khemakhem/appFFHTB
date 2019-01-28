@@ -6,6 +6,8 @@ namespace App\Controller;
  * CronTasks Controller
  *
  * @property \App\Model\Table\CronTasksTable $CronTasks
+ * @property \App\Model\Table\MembresTasksTable $Membres
+ * @property \App\Model\Table\PraticiensTasksTable $Praticiens
  *
  * @method \App\Model\Entity\CronTask[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
@@ -102,5 +104,19 @@ class CronTasksController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+    function exportMembresFFHTB(){
+        $this->loadModel('Membres');
+        $controller = $this->request->getQuery('controller');
+        $action = $this->request->getQuery('action');
+        $this->CronTasks->membreJson($controller,$action);
+
+    }
+    function exportPraticiensFFHTB(){
+        $this->loadModel('Praticiens');
+        $controller = $this->request->getQuery('controller');
+        $action = $this->request->getQuery('action');
+        $this->CronTasks->praticienJson($controller,$action);
+
     }
 }
