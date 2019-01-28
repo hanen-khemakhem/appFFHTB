@@ -6,8 +6,8 @@ namespace App\Controller;
  * CronTasks Controller
  *
  * @property \App\Model\Table\CronTasksTable $CronTasks
- * @property \App\Model\Table\MembresTasksTable $Membres
- * @property \App\Model\Table\PraticiensTasksTable $Praticiens
+ * @property \App\Model\Table\MembresTable $Membres
+ * @property \App\Model\Table\PraticiensTable $Praticiens
  *
  * @method \App\Model\Entity\CronTask[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
