@@ -37,7 +37,6 @@ echo $this->Form->end();
                                 <?= $this->Form->button('Connexion',array('class'=>'btn btn-info btn-md')) ?>
 
                             </div>
-                            
                         <?php 
 						echo $this->Form->end();
 						?>
