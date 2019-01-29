@@ -50,6 +50,8 @@ class PraticiensController extends AppController
         $praticien = $this->Praticiens->newEntity();
         if (!empty($this->request->getData())) {
             $praticien = $this->Praticiens->patchEntity($praticien, $this->request->getData());
+            dump($praticien);
+            die();
             if ($this->Praticiens->save($praticien)) {
                 $this->Flash->success(__('Praticien ajouté.'));
 
