@@ -36,6 +36,7 @@ class AppController extends Controller
      * e.g. `$this->loadComponent('Security');`
      *
      * @return void
+     * @throws \Exception
      */
     public function initialize()
     {
@@ -72,16 +73,10 @@ class AppController extends Controller
                 $this->Auth->setUser($user);
                 return $this->redirect(['controller'=>'Membres','action'=>'index']);
             }
-            /*$this->Flash->set(
-                __('Votre identifiant ou votre mot de passe est incorrect.', true),
-                array(
-                    'element' => 'growl'
-                )
-            );*/
+
             $this->Flash->error(__('Votre identifiant ou votre mot de passe est incorrect'));
         }
 
-       // $this->viewBuilder()->setLayout('login');
     }
     public function logout()
     {

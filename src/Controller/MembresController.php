@@ -49,6 +49,7 @@ class MembresController extends AppController
      */
     public function add()
     {
+
         $membre = $this->Membres->newEntity();
         if (!empty($this->request->getData())) {
             $membre = $this->Membres->patchEntity($membre, $this->request->getData());
@@ -171,9 +172,9 @@ class MembresController extends AppController
                 ->first();*/
                 
             //if (!$ann) {
-                if($membre->installed =='0000-00-00'){
+                if($annuaire->installed =='0000-00-00'){
 
-                dump($membre->installed);
+                dump($annuaire->installed);
                 die();
                 }
                 

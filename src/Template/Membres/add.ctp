@@ -2,6 +2,8 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Membre $membre
+ * @var $domaines
+ * @var $Pays
  */
 ?>
 

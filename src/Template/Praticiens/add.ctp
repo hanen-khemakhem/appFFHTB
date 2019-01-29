@@ -8,7 +8,7 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List des praticiens'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Liste des praticiens'), ['action' => 'index']) ?></li>
 
     </ul>
 </nav>
