@@ -21,8 +21,8 @@
     <?php
     echo $this->V->input('nom',array('label'=>"Nom du thérapeute"));
     echo $this->V->input('is_referant',array('label'=>"Référant psynapse ?",'type'=>"select",'options'=>array('0'=>'Non','1'=>'Oui')));
-    echo $this->V->separator();
-    echo $this->V->input('domaines',array('label'=>"Thérapies pratiquées",'type'=>'select','options'=>$domaines));
+    echo $this->V->input('email',['label'=>'Email']);
+    echo $this->V->input('domaines',array('label'=>"Thérapies pratiquées <small>(maintenez la touche ctrl pour en choisir plusieurs)</small>",'escape'=>false,'options'=>$domaines,'type'=>'select','multiple'=>true));
     ?>
      <h3>Coordonnées du cabinet</h3>
     <?php
@@ -43,7 +43,7 @@
      <h3>Compléments</h3>
     <?php
     echo $this->V->input('commentaire',array('label'=>"Commentaire",'type' => 'textarea'));
-    echo $this->V->input('installed',array('label'=>['text' => "Date d'installation <small>(Ex: 12/01/2010 ou 2009)</small>",'escape' => false],'type'=>'datepicker','value'=>false,'div'=>array('class'=>'oneQuartWidth')));
+    echo $this->V->input('installed',array('label'=>['text' => "Date d'installation"],'type'=>'date','value'=>false));
     ?>
  <?= $this->Form->button('Valider') ?>
 </fieldset>

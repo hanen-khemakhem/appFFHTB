@@ -49,14 +49,21 @@ class MembresController extends AppController
      */
     public function add()
     {
-
+    $array=[];
         $membre = $this->Membres->newEntity();
         if (!empty($this->request->getData())) {
             $membre = $this->Membres->patchEntity($membre, $this->request->getData());
-            if ($this->request->getData()['installed'] == date('Y-m-d'))
+            if ($this->request->getData()['installed'] == date('d/m/Y'))
                 $membre->installed = null;
+            /*foreach ($membre->domaines as $domaine) {
+                $array[] = $domaine;
+            }
+            dump($membre);
+            die();
+            $formations = implode(' ,', $array);
+            $membre->domaines=$formations;*/
             if (is_array($this->request->getData()['domaines']))
-                $this->request->getData()['domaines'] = implode(', ', $this->request->getData()['domaines']);
+                $membre->domaines = implode(', ', $this->request->getData()['domaines']);
 
             $adress = $this->request->getData()['adresse1'] . '+' . $this->request->getData()['code_postal'] . '+' . $this->request->getData()['ville'];
             $adress = str_replace(" ", "+", $adress);
@@ -163,15 +170,15 @@ class MembresController extends AppController
         $count=count($tab['membre']);
         
         $membres = [];
-        $a=array();
         foreach ($tab['membre'] as $k => $annuaire) {
-           /* $ann = $this->Membres->find()->where(['nom' => $annuaire->nom,
+            $ann = $this->Membres->find()->where(['nom' => $annuaire->nom,
+                'email'=>$annuaire->email,
                 'adresse1' => $annuaire->adresse1,
                 'code_postal' => $annuaire->code_postal,
                 'ville' => $annuaire->ville])
-                ->first();*/
+                ->first();
                 
-            //if (!$ann) {
+            if (!$ann) {
                 if($annuaire->installed =='0000-00-00'){
 
                 dump($annuaire->installed);
@@ -212,15 +219,8 @@ class MembresController extends AppController
                 $formations = implode(' ,', $array);
                 $membre->domaines = $formations;
                 $membres[] = $membre;
-
-                //try {
-               /* } catch (\Exception $e) {
-                    dump($e);
-                    die();
-                }*/
-            //}
+            }
         }
-
                    dump($this->Membres->saveMany($membres));
         
            

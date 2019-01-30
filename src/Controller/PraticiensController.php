@@ -50,8 +50,6 @@ class PraticiensController extends AppController
         $praticien = $this->Praticiens->newEntity();
         if (!empty($this->request->getData())) {
             $praticien = $this->Praticiens->patchEntity($praticien, $this->request->getData());
-            dump($praticien);
-            die();
             if ($this->Praticiens->save($praticien)) {
                 $this->Flash->success(__('Praticien ajouté.'));
 
@@ -113,15 +111,14 @@ class PraticiensController extends AppController
         $json=json_decode(str_replace("var data = ", "", $content))->annuaire;
         $tab=array();
         $tab['prat']=$json;
-        dump(count($tab['prat']));
-        die();
         $praticiens = [];
         foreach ($tab['prat'] as $k => $value){
-            /*$prat = $this->Praticiens->find()->where(['nom' => $value->nomPrenom,
-                'niveau' => $value->formation])
+            $prat = $this->Praticiens->find()->where(['nom' => $value->nomPrenom,
+                'niveau' => $value->formation,
+                'annee_certif'=>$value->annee])
                 ->first();
 
-            if (!$prat) {*/
+            if (!$prat) {
                 $praticien = $this->Praticiens->newEntity();
                 $array = array();
                 $praticien->nom = $value->nomPrenom;
@@ -129,7 +126,7 @@ class PraticiensController extends AppController
                 $praticien->annee_certif = $value->annee;
                 $praticien->pays = $value->pays;
                 $praticiens[] = $praticien;
-            //}
+            }
         }
                 dump($this->Praticiens->saveMany($praticiens));
                 
