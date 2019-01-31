@@ -180,9 +180,7 @@ class MembresController extends AppController
                 
             if (!$ann) {
                 if($annuaire->installed =='0000-00-00'){
-
-                dump($annuaire->installed);
-                die();
+                    $annuaire->installed=null;
                 }
                 
                 $membre = $this->Membres->newEntity();
