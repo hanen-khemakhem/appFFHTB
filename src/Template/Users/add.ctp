@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User $user
+ * @var $userTypes
  */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
@@ -17,7 +18,7 @@
         <?php
             echo $this->Form->control('username');
             echo $this->Form->control('password');
-            echo $this->Form->control('role');
+            echo $this->Form->control('role', ['label' => 'Role', 'class' => 'ui-widget-content ui-corner-all', 'options' => $userTypes, 'empty' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

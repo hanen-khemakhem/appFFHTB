@@ -108,15 +108,20 @@ class PraticiensController extends AppController
     public function prat(){
          $url=WWW_ROOT.'annuaires/praticiens.json';
         $content=file_get_contents($url);
-        $json=json_decode(str_replace("var data = ", "", $content))->annuaire;
+        $json=json_decode(str_replace("var data = ", "", $content));
         $tab=array();
-        $tab['prat']=$json;
+        $tab['prat']=$json->annuaire;
+
         $praticiens = [];
         foreach ($tab['prat'] as $k => $value){
+
+
             $prat = $this->Praticiens->find()->where(['nom' => $value->nomPrenom,
                 'niveau' => $value->formation,
                 'annee_certif'=>$value->annee])
                 ->first();
+
+
 
             if (!$prat) {
                 $praticien = $this->Praticiens->newEntity();

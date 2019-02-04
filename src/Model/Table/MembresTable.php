@@ -292,7 +292,7 @@ class MembresTable extends Table
         '126'=>'Chine',
         '127'=>'Chypre',
         '128'=>'Corée du Nord',
-        '128'=>'Corée du Sud',
+        '129'=>'Corée du Sud',
         '130'=>'Émirats arabes unis',
         '131'=>'Géorgie',
         '132'=>'Hongkon',
@@ -396,7 +396,8 @@ class MembresTable extends Table
         '230'=>'Tonga',
         '231'=>'Tuvalu',
         '232'=>'Vanuatu',
-        '233'=>'Wallis et Futuna'
+        '233'=>'Wallis et Futuna',
+        '234'=>"Tunisie"
 
     );
 

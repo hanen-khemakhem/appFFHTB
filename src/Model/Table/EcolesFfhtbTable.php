@@ -7,20 +7,22 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Praticiens Model
+ * EcolesFfhtb Model
  *
- * @method \App\Model\Entity\Praticien get($primaryKey, $options = [])
- * @method \App\Model\Entity\Praticien newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Praticien[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Praticien|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Praticien|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Praticien patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Praticien[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Praticien findOrCreate($search, callable $callback = null, $options = [])
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ *
+ * @method \App\Model\Entity\EcolesFfhtb get($primaryKey, $options = [])
+ * @method \App\Model\Entity\EcolesFfhtb newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\EcolesFfhtb[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\EcolesFfhtb|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\EcolesFfhtb|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\EcolesFfhtb patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\EcolesFfhtb[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\EcolesFfhtb findOrCreate($search, callable $callback = null, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class PraticiensTable extends Table
+class EcolesFfhtbTable extends Table
 {
 
     /**
@@ -33,11 +35,16 @@ class PraticiensTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('praticiens');
+        $this->setTable('ecoles_ffhtb');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -54,25 +61,75 @@ class PraticiensTable extends Table
 
         $validator
             ->scalar('nom')
-            ->maxLength('nom', 255)
-            ->allowEmpty('nom');
+            ->maxLength('nom', 40)
+            ->requirePresence('nom', 'create')
+            ->notEmpty('nom');
 
         $validator
-            ->scalar('niveau')
-            ->maxLength('niveau', 255)
-            ->allowEmpty('niveau');
+            ->scalar('logo')
+            ->maxLength('logo', 255)
+            ->allowEmpty('logo');
 
         $validator
-            ->scalar('annee_certif')
-            ->maxLength('annee_certif', 4)
-            ->allowEmpty('annee_certif');
+            ->scalar('adresse')
+            ->maxLength('adresse', 255)
+            ->allowEmpty('adresse');
+
+        $validator
+            ->scalar('ville')
+            ->maxLength('ville', 100)
+            ->allowEmpty('ville');
 
         $validator
             ->scalar('pays')
             ->maxLength('pays', 255)
             ->allowEmpty('pays');
 
+        $validator
+            ->scalar('code_postal')
+            ->maxLength('code_postal', 10)
+            ->allowEmpty('code_postal');
+
+        $validator
+            ->scalar('telephone')
+            ->maxLength('telephone', 100)
+            ->allowEmpty('telephone');
+
+        $validator
+            ->email('email')
+            ->requirePresence('email', 'create')
+            ->notEmpty('email');
+
+        $validator
+            ->scalar('presentation')
+            ->allowEmpty('presentation');
+
+        $validator
+            ->scalar('sujet')
+            ->maxLength('sujet', 255)
+            ->allowEmpty('sujet');
+
+        $validator
+            ->scalar('site')
+            ->maxLength('site', 255)
+            ->allowEmpty('site');
+
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->isUnique(['email']));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
+
+        return $rules;
     }
     var $pays=array("France (métropole)"=>"France (métropole)",
         'Corse'=>'Corse',

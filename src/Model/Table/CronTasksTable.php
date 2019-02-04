@@ -108,7 +108,7 @@ class CronTasksTable extends Table
     foreach ($membres as $membre){
         $array['annuaire'][]=$membre;
     }
-    $path = "/web/wp-content/plugins/annuaireFfhtb/files/";
+    $path = "/web/wp-content/plugins/psyclick/data/";
 
     $conn_id = ftp_connect("psynapse.fr");
     $ftp_user_name = "c3_2018";
@@ -162,7 +162,7 @@ class CronTasksTable extends Table
         file_put_contents(WWW_ROOT.'annuaires/annuaire_ffhtb.json', json_encode($tab));
 
 
-        $path = "/web/wp-content/plugins/annuaireFfhtb/files/";
+        $path = "/web/wp-content/plugins/psyclick/data/";
 
         $conn_id = ftp_connect("psynapse.fr");
         $ftp_user_name = "c3_2018";

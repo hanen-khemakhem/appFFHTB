@@ -163,21 +163,23 @@ class MembresController extends AppController
     {
         $url = WWW_ROOT . 'annuaires/membres.json';
         $content = file_get_contents($url);
-        $json = json_decode($content);
+        $json=json_decode(str_replace("var data = ", "", $content));
+        //$json = json_decode($content);
 
         $tab = array();
+        $tab['count']=$json->count;
         $tab['membre'] = $json->annuaire;
-        $count=count($tab['membre']);
-        
         $membres = [];
+
         foreach ($tab['membre'] as $k => $annuaire) {
+
             $ann = $this->Membres->find()->where(['nom' => $annuaire->nom,
                 'email'=>$annuaire->email,
                 'adresse1' => $annuaire->adresse1,
                 'code_postal' => $annuaire->code_postal,
                 'ville' => $annuaire->ville])
                 ->first();
-                
+
             if (!$ann) {
                 if($annuaire->installed =='0000-00-00'){
                     $annuaire->installed=null;
@@ -218,6 +220,7 @@ class MembresController extends AppController
                 $membre->domaines = $formations;
                 $membres[] = $membre;
             }
+
         }
                    dump($this->Membres->saveMany($membres));
         

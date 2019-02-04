@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User $user
+ * @var $userTypes
  */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
@@ -13,7 +14,7 @@
                 ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Liste des utulisateurs'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="users form large-9 medium-8 columns content">
@@ -23,7 +24,7 @@
         <?php
             echo $this->Form->control('username');
             echo $this->Form->control('password');
-            echo $this->Form->control('role');
+            echo $this->Form->control('role', ['label' => 'Role', 'class' => 'ui-widget-content ui-corner-all', 'options' => $userTypes, 'empty' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

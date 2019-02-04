@@ -39,6 +39,10 @@ class UsersTable extends Table
 
         $this->addBehavior('Timestamp');
     }
+    var $types = array(
+        'user' => "Utilisateur",
+        'admin' => "Administrateur"
+    );
 
     /**
      * Default validation rules.

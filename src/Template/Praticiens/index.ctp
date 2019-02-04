@@ -9,6 +9,7 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Ajouter un praticien'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('Liste des membres'), ['controller'=>'membres','action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Liste des utilisateurs'), ['controller'=>'users','action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="praticiens index large-9 medium-8 columns content">
