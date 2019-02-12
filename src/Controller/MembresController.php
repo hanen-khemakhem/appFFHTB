@@ -55,13 +55,6 @@ class MembresController extends AppController
             $membre = $this->Membres->patchEntity($membre, $this->request->getData());
             if ($this->request->getData()['installed'] == date('d/m/Y'))
                 $membre->installed = null;
-            /*foreach ($membre->domaines as $domaine) {
-                $array[] = $domaine;
-            }
-            dump($membre);
-            die();
-            $formations = implode(' ,', $array);
-            $membre->domaines=$formations;*/
             if (is_array($this->request->getData()['domaines']))
                 $membre->domaines = implode(', ', $this->request->getData()['domaines']);
 
@@ -88,7 +81,8 @@ class MembresController extends AppController
         }
         $domaines = $this->Membres->domaines;
         $Pays = $this->Membres->pays;
-        $this->set(compact('membre', 'domaines', 'Pays'));
+        $civilites = $this->Membres->civilites;
+        $this->set(compact('membre', 'domaines', 'Pays','civilites'));
     }
 
     /**
@@ -136,7 +130,8 @@ class MembresController extends AppController
         }
         $Pays = $this->Membres->pays;
         $domaines = $this->Membres->domaines;
-        $this->set(compact('membre', 'domaines', 'Pays'));
+        $civilites = $this->Membres->civilites;
+        $this->set(compact('membre', 'domaines', 'Pays','civilites'));
     }
 
     /**
@@ -163,44 +158,46 @@ class MembresController extends AppController
     {
         $url = WWW_ROOT . 'annuaires/membres.json';
         $content = file_get_contents($url);
-        $json=json_decode(str_replace("var data = ", "", $content));
+        $json=json_decode( $content);
+
         //$json = json_decode($content);
 
         $tab = array();
-        $tab['count']=$json->count;
-        $tab['membre'] = $json->annuaire;
+        $annuaires = $json->participant;
+
         $membres = [];
 
-        foreach ($tab['membre'] as $k => $annuaire) {
+        foreach ($annuaires as $k => $annuaire) {
 
-            $ann = $this->Membres->find()->where(['nom' => $annuaire->nom,
-                'email'=>$annuaire->email,
-                'adresse1' => $annuaire->adresse1,
-                'code_postal' => $annuaire->code_postal,
-                'ville' => $annuaire->ville])
+
+            $ann = $this->Membres->find()->where(['nom' => $annuaire->Annuaire->nom,
+                'title'=>$annuaire->Annuaire->title,
+                'email'=>$annuaire->Annuaire->email,
+                'adresse1' => $annuaire->Annuaire->adresse1,
+                'code_postal' => $annuaire->Annuaire->code_postal,
+                'ville' => $annuaire->Annuaire->ville])
                 ->first();
 
             if (!$ann) {
-                if($annuaire->installed =='0000-00-00'){
-                    $annuaire->installed=null;
-                }
                 
                 $membre = $this->Membres->newEntity();
                 $array = array();
-                $membre->country_id = $annuaire->country_id;
-                $membre->is_referant = $annuaire->is_referant;
-                $membre->nom = $annuaire->nom;
-                $membre->email = $annuaire->email;
-                $membre->title = $annuaire->title;
-                $membre->telephone=$annuaire->telephone;
-                $membre->adresse1 = $annuaire->adresse1;
-                $membre->region = $annuaire->region;
-                $membre->code_postal = $annuaire->code_postal;
-                $membre->ville = $annuaire->ville;
-                $membre->site_web = $annuaire->site_web;
-                $membre->commentaire = $annuaire->commentaire;
-                if (isset($annuaire->installed)) {
-                    $membre->installed = $annuaire->installed;
+                $membre->country_id = $annuaire->Annuaire->country_id;
+                $membre->is_referant = $annuaire->Annuaire->is_referant;
+                $membre->civilite=$annuaire->Civilite->title;
+                $membre->nom = $annuaire->Annuaire->nom;
+                $membre->email = $annuaire->Annuaire->email;
+                $membre->title = $annuaire->Annuaire->title;
+                $membre->telephone=$annuaire->Annuaire->telephone;
+                $membre->adresse1 = $annuaire->Annuaire->adresse1;
+                $membre->region = $annuaire->Annuaire->region;
+                $membre->code_postal = $annuaire->Annuaire->code_postal;
+                $membre->ville = $annuaire->Annuaire->ville;
+                $membre->site_web = $annuaire->Annuaire->site_web;
+                $membre->commentaire = $annuaire->Annuaire->commentaire;
+
+                if (isset($annuaire->Annuaire->installed)) {
+                    $membre->installed = $annuaire->Annuaire->installed;
                 } elseif ($membre->installed== '0000-00-00') {
                     $membre->installed=date('Y-m-d');
                 }
@@ -208,12 +205,12 @@ class MembresController extends AppController
                     $membre->installed = null;
                 }
 
-                $membre->departement = $annuaire->departement;
-                $membre->region = $annuaire->region;
-                $membre->lat = $annuaire->lat;
-                $membre->lng = $annuaire->lng;
-                if(isset($annuaire->domaines))
-                foreach ($annuaire->domaines as $domaine) {
+                $membre->departement = $annuaire->Annuaire->departement;
+                $membre->region = $annuaire->Annuaire->region;
+                $membre->lat = $annuaire->Annuaire->lat;
+                $membre->lng = $annuaire->Annuaire->lng;
+                if(isset($annuaire->Annuaire->domaines))
+                foreach ($annuaire->Annuaire->domaines as $domaine) {
                     $array[] = $domaine;
                 }
                 $formations = implode(' ,', $array);
@@ -226,6 +223,50 @@ class MembresController extends AppController
         
            
         return;
+    }
+    public function annuaireCarte(){
+        $formations=$this->Membres->formation;
+        $regions=$this->Membres->regions;
+
+       $annuaires= $this->Membres->find()
+            ->order(['nom'])
+            ->toArray();
+       $domaines=$this->Membres->find()
+           ->select(['domaines'])
+           ->group(['domaines'])
+           ->toArray();
+       $tab=array();
+       $tab['formation']=array();
+       $tab['participant']=array();
+       $tab['annuaire']=array();
+       $tab['region']=array();
+       $tab['formation']=$formations;
+       $tab['region']=$regions;
+        foreach ($annuaires as $annuaire) {
+            $tab['participant'][]['AdherentsSuph'] = $annuaire;
+
+        }
+        dump($tab['participant']);
+        die();
+
+
+
+        dump(file_put_contents(WWW_ROOT.'annuaires/annuairesPrat.json', json_encode($tab)));
+        die();
+
+
+        $path = "/web/wp-content/plugins/annuairesTherapeutes/files/";
+
+        $conn_id = ftp_connect("psynapse.fr");
+        $ftp_user_name = "c3_sup-h";
+        $ftp_user_pass = "jkAr3MM#";
+        $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+        ftp_pasv($conn_id, true) ;
+
+        $tmp = WWW_ROOT.'annuaires/annuairesPrat.json';
+        @ftp_delete($conn_id, $path."annuairesPrat.json");
+        ftp_put($conn_id, $path."annuairesPrat.json", $tmp, FTP_BINARY);
+
     }
     
 }

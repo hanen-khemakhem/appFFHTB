@@ -57,15 +57,13 @@ class EcolesFfhtbController extends AppController
         if ($this->request->is('post')) {
             $ecolesFfhtb = $this->EcolesFfhtb->patchEntity($ecolesFfhtb, $this->request->getData());
 
+            $user=$this->EcolesFfhtb->Users->newEntity();
+            $user->username=strtoupper(str_replace(" ","-",$ecolesFfhtb->nom))."-2019%";
+            $a=md5($ecolesFfhtb->nom.''.$ecolesFfhtb->pays);
+            $user->password=$a;
+            $user->role='ecole';
+            $ecolesFfhtb->user = $user;
             if ($this->EcolesFfhtb->save($ecolesFfhtb)) {
-                $user=$this->Users->newEntity();
-                $user->username=str_replace(" ","-",$ecolesFfhtb->nom);
-                $a=sprintf("E%06d",$ecolesFfhtb->id);
-                $user->password=$a;
-                $user->role='admin';
-                $this->Users->save($user);
-                $ecolesFfhtb->user_id=$user->id;
-                $this->EcolesFfhtb->save($ecolesFfhtb);
                 $this->Flash->success(__('Ecole FFHTb ajouté. Votre identifiant est: '.$user->username.' Votre mot de passe est: '. $a));
 
                 return $this->redirect(['action' => 'index']);

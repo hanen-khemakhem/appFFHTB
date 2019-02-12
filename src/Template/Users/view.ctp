@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
+<?php if($this->Session->read('Auth.User.role')=="admin"):?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -42,3 +43,4 @@
         </tr>
     </table>
 </div>
+<?php endif;?>

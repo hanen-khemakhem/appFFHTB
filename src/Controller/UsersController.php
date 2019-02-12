@@ -112,7 +112,7 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
-                return $this->redirect(['controller'=>'Membres','action'=>'index']);
+                return $this->redirect(['controller'=>'Praticiens','action'=>'index']);
             }
             /*$this->Flash->set(
                 __('Votre identifiant ou votre mot de passe est incorrect.', true),

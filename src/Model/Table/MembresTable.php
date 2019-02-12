@@ -57,6 +57,11 @@ class MembresTable extends Table
             ->notEmpty('country_id');
 
         $validator
+            ->integer('civilite')
+            ->requirePresence('civilite', 'create')
+            ->notEmpty('civilite');
+
+        $validator
             ->integer('is_referant')
             ->requirePresence('is_referant', 'create')
             ->notEmpty('is_referant');
@@ -147,9 +152,172 @@ class MembresTable extends Table
         $validator
             ->scalar('domaines')
             ->allowEmpty('domaines');
+        $validator
+            ->integer('in_ffhtb')
+            ->requirePresence('in_ffhtb', 'create')
+            ->notEmpty('in_ffhtb');
 
         return $validator;
     }
+    var $formation=array(
+        "PNL",
+        "Hypnose",
+        "Sophrologie",
+        "Coaching",
+        "Psycho-Pathologie",
+        "Sexothérapie",
+        "Deep Neural Repatterning",
+        "Psycho-Praticien",
+        "Hypnose Spécialité",
+        "Diplome NGH",
+        "Neuroline",
+        "Heritage",
+        "Thérapie Brève",
+        "PNL & Hypnose",
+        "Divers",
+        "reservation",
+        "Report Paiement en Attente de dates",
+        "Congrès",
+        "FORMATION"
+    );
+    var $regions=array(
+       3 =>[
+            'title'=>"Rennes",
+            'lat'=>48.117266,
+            'lng'=>-1.6777926
+        ],
+        4 =>[
+            'title'=>"Lyon",
+            'lat'=>45.764043,
+            'lng'=>4.835659
+        ],
+        6 =>[
+            'title'=>"Bordeaux",
+            'lat'=>44.837789,
+            'lng'=>-0.57918
+        ],
+        7 =>[
+            'title'=>"Paris",
+            'lat'=>48.856614,
+            'lng'=>2.3522219
+        ],
+        8 =>[
+            "title"=> "Strasbourg",
+            "lat"=> 48.5734053,
+            "lng"=> 7.7521113
+        ],
+        9 =>[
+            "title"=> "Lille",
+            "lat"=> 50.62925,
+            "lng"=> 3.057256
+        ],
+        11 =>[
+            "title"=> "Reunion",
+            "lat"=> -21.115141,
+            "lng"=> 55.536384
+        ],
+        13 =>[
+            "title"=> "Guadeloupe Martinique Guyane",
+            "lat"=> 16.268455,
+            "lng"=> -61.480935
+        ],
+        17 =>[
+            "title"=> "Marseille",
+            "lat"=> 43.296482,
+            "lng"=> 5.36978
+        ],
+        18 =>[
+            "title"=> "Genève",
+            "lat"=> 46.2043907,
+            "lng"=> 6.1431577
+        ],
+        19 =>[
+            "title"=> "Montpellier",
+            "lat"=> 43.610769,
+            "lng"=> 3.876716
+        ],
+        20 =>[
+            "title"=> "Bruxelles",
+            "lat"=> 50.8503463,
+            "lng"=> 4.3517211
+        ],
+        21 =>[
+            "title"=> "Londres",
+            "lat"=> 51.5073509,
+            "lng"=> -0.1277583
+        ],
+        22 =>[
+            "title"=> "Canada",
+            "lat"=> 56.130366,
+            "lng"=> -106.346771
+        ],
+        23 =>[
+            "title"=> "Perpignan",
+            "lat"=> 42.6886591,
+            "lng"=> 2.8948332
+        ],
+        24 =>[
+            "title"=> "Toulouse",
+            "lat"=> 43.604652,
+            "lng"=> 1.444209
+        ],
+        25 =>[
+            "title"=> "Clermont Ferrand",
+            "lat"=> 45.777222,
+            "lng"=> 3.087025
+        ],
+        33 =>[
+            "title"=> "UK",
+            "lat"=> 55.378051,
+            "lng"=> -3.435973
+        ],
+        34 =>[
+            "title"=> "Caen",
+            "lat"=> 49.182863,
+            "lng"=> -0.370679
+        ],
+        35 =>[
+            "title"=> "Nantes",
+            "lat"=> 47.218371,
+            "lng"=> -1.553621
+        ],
+        36 =>[
+            "title"=> "Luxembourg",
+            "lat"=> 49.815273,
+            "lng"=> 6.129583
+        ],
+        37 =>[
+            "title"=> "Liège",
+            "lat"=> 50.6325574,
+            "lng"=> 5.5796662
+        ],
+        38 =>[
+            "title"=> "Namur",
+            "lat"=> 50.4673883,
+            "lng"=> 4.8719854
+        ],
+        39 =>[
+            "title"=> "Charleroi",
+            "lat"=> 50.4108095,
+            "lng"=> 4.444643
+        ],
+        40 =>[
+            "title"=> "Fribourg",
+            "lat"=> 46.8064773,
+            "lng"=> 7.1619719
+        ],
+        41 =>[
+            "title"=> "Lausanne",
+            "lat"=> 46.5196535,
+            "lng"=> 6.6322734
+        ],
+        42 =>[
+            "title"=> "Esch-sur-Alzette",
+            "lat"=> 49.5008805,
+            "lng"=> 5.9860925
+        ]
+
+    );
     var $domaines = array(
         'Coaching' => 'Coaching',
         'Ennéagramme' => 'Ennéagramme',
@@ -164,6 +332,12 @@ class MembresTable extends Table
         'Sophrologie' => 'Sophrologie',
         "DNR" => "DNR"
     );
+    var $civilites=array(
+        'Mlle'=>'Mademoiselle',
+        'Mme'=>'Madame',
+        'M'=>'Monsieur',
+        'Dr'=>'Docteur',
+        'Pr'=>'Professeur');
     var $pays=array("1"=>"France (métropole)",
         '2'=>'Corse',
         '3'=>'Guadeloupe',

@@ -149,15 +149,23 @@ class CronTasksTable extends Table
         $tab['count']=array();
         $tab['annuaire']=array();
         //liste de tous les membres
-        $praticiens=TableRegistry::getTableLocator()->get('Praticiens')->find()->toArray();
+        $praticiens=TableRegistry::getTableLocator()->get('Praticiens')->find()
+            ->where(['in_annuaire'=>1])
+            ->toArray();
         $count=count($praticiens);
         $tab['count']=$count;
         foreach ($praticiens as $k => $praticien){
-            $tab['annuaire'][$k]['nomPrenom']=$praticien->nom;
-            $tab['annuaire'][$k]['formation']=$praticien->niveau;
-            $tab['annuaire'][$k]['annee']=$praticien->annee_certif;
-            $tab['annuaire'][$k]['pays']=$praticien->pays;
+
+            $tab['annuaire'][$praticien->id]['nomPrenom']=$praticien->nom;
+            $tab['annuaire'][$praticien->id]['adresse']=$praticien->adresse;
+            $tab['annuaire'][$praticien->id]['formation']=$praticien->niveau;
+            $tab['annuaire'][$praticien->id]['ville']=$praticien->ville;
+            $tab['annuaire'][$praticien->id]['annee']=$praticien->annee_certif;
+            $tab['annuaire'][$praticien->id]['pays']=$praticien->pays;
         }
+        dump(json_encode($tab));
+        die();
+
 
         file_put_contents(WWW_ROOT.'annuaires/annuaire_ffhtb.json', json_encode($tab));
 
@@ -171,8 +179,8 @@ class CronTasksTable extends Table
         ftp_pasv($conn_id, true) ;
         $tmp = WWW_ROOT.'annuaires/annuaire_ffhtb.json';
 
-        @ftp_delete($conn_id, $path."praticiens.json");
-        if(ftp_put($conn_id, $path."praticiens.json", $tmp, FTP_BINARY)){
+        @ftp_delete($conn_id, $path."annuaire_ffhtb.json");
+        if(ftp_put($conn_id, $path."annuaire_ffhtb.json", $tmp, FTP_BINARY)){
             if (isset($cron) && !empty($cron)) {
                 $c=$this->newEntity();
                 $c->id = $cron['id'];

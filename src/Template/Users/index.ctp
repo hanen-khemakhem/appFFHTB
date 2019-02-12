@@ -4,11 +4,12 @@
  * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
  */
 ?>
+
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Ajouter un utilisateur'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('Liste des membres'), ['controller'=>'membres','action' => 'index']) ?></li>
+        <!--<li><?/*= $this->Html->link(__('Liste des membres'), ['controller'=>'membres','action' => 'index']) */?></li>-->
         <li><?= $this->Html->link(__('Liste des praticiens'), ['controller'=>'praticiens','action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('Liste des écoles FFHTB'), ['controller'=>'ecolesFfhtb','action' => 'index']) ?></li>
     </ul>

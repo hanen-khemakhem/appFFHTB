@@ -55,7 +55,7 @@ class PraticiensTable extends Table
         $validator
             ->scalar('nom')
             ->maxLength('nom', 255)
-            ->allowEmpty('nom');
+            ->notEmpty('nom');
 
         $validator
             ->scalar('niveau')
@@ -71,6 +71,28 @@ class PraticiensTable extends Table
             ->scalar('pays')
             ->maxLength('pays', 255)
             ->allowEmpty('pays');
+
+        $validator
+            ->scalar('adresse')
+            ->maxLength('adresse', 255)
+            ->allowEmpty('adresse');
+        $validator
+            ->scalar('ville')
+            ->maxLength('ville', 255)
+            ->allowEmpty('ville');
+        $validator
+            ->scalar('telephone')
+            ->maxLength('telephone', 255)
+            ->allowEmpty('telephone');
+        $validator
+            ->scalar('email')
+            ->maxLength('email', 255)
+            ->allowEmpty('email');
+        $validator
+            ->scalar('specialite')
+            ->maxLength('specialite', 255)
+            ->allowEmpty('specialite');
+
 
         return $validator;
     }

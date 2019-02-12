@@ -2,8 +2,9 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Membre $membre
- * @var domaines
+ * @var $domaines
  * @var $Pays
+ * @var $civilites
  */
 ?>
 
@@ -19,8 +20,8 @@
 <fieldset class="pano bleu">
     <h3>Informations générales</h3>
     <?php
+    echo $this->V->input('civilite',array('label'=>"Civilité",'type'=>'select','options'=>$civilites));
     echo $this->V->input('nom',array('label'=>"Nom du thérapeute"));
-    echo $this->V->input('is_referant',array('label'=>"Référant psynapse ?",'type'=>"select",'options'=>array('0'=>'Non','1'=>'Oui')));
     echo $this->V->separator();
     echo $this->V->input('domaines',array('label'=>"Thérapies pratiquées",'type'=>'select','options'=>$domaines));
     ?>

@@ -3,12 +3,13 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\EcolesFfhtb $ecolesFfhtb
  * @var $users
+ * @var $Pays
  */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Ecoles Ffhtb'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Liste des Ecoles Ffhtb'), ['action' => 'index']) ?></li>
 
     </ul>
 </nav>
@@ -17,7 +18,8 @@
     <fieldset>
         <legend><?= __('Add Ecoles Ffhtb') ?></legend>
         <?php
-            echo $this->Form->control('user_id', ['options' => $users]);
+            echo $this->Form->hidden('id');
+            //echo $this->Form->control('user_id', ['options' => $users]);
             echo $this->Form->control('nom');
             echo $this->Form->control('logo');
             echo $this->Form->control('adresse');

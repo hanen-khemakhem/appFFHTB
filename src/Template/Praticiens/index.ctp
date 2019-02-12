@@ -8,8 +8,11 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Ajouter un praticien'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('Liste des membres'), ['controller'=>'membres','action' => 'index']) ?></li>
+        <!--<li><?/*= $this->Html->link(__('Liste des membres'), ['controller'=>'membres','action' => 'index']) */?></li>-->
+        <?php if($this->Session->read('Auth.User.role')=="admin"):?>
         <li><?= $this->Html->link(__('Liste des utilisateurs'), ['controller'=>'users','action' => 'index']) ?></li>
+        <?php endif;?>
+        <li><?= $this->Html->link(__('Liste des écoles FFHTB'), ['controller'=>'ecolesFfhtb','action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="praticiens index large-9 medium-8 columns content">
@@ -38,9 +41,11 @@
                 <td><?= h($praticien->created) ?></td>
                 <td><?= h($praticien->modified) ?></td>
                 <td class="actions">
+                    <?php if($this->Session->read('Auth.User.role')=="admin"):?>
                     <?= $this->Html->link(__('View'), ['action' => 'view', $praticien->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $praticien->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $praticien->id], ['confirm' => __('Are you sure you want to delete # {0}?', $praticien->id)]) ?>
+                    <?php endif;?>
                 </td>
             </tr>
             <?php endforeach; ?>

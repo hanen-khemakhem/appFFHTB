@@ -3,6 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\EcolesFfhtb $ecolesFfhtb
  * @var $users
+ * @var $Pays
  */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
@@ -11,10 +12,10 @@
         <li><?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $ecolesFfhtb->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $ecolesFfhtb->id)]
+                ['confirm' => __('Voulez vous supprimer cette école?', $ecolesFfhtb->id)]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Ecoles Ffhtb'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Liste des Ecoles Ffhtb'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="ecolesFfhtb form large-9 medium-8 columns content">

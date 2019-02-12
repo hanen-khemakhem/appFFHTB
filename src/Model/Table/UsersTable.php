@@ -40,8 +40,8 @@ class UsersTable extends Table
         $this->addBehavior('Timestamp');
     }
     var $types = array(
-        'user' => "Utilisateur",
-        'admin' => "Administrateur"
+        'admin' => "Administrateur",
+        'ecole' => "Ecole FFHTB"
     );
 
     /**

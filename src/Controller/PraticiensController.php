@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * Praticiens Controller
@@ -53,7 +54,7 @@ class PraticiensController extends AppController
             if ($this->Praticiens->save($praticien)) {
                 $this->Flash->success(__('Praticien ajouté.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view',$praticien->id]);
             }
             $this->Flash->error(__('impossible d\'ajouter le praticien.'));
         }
@@ -106,7 +107,7 @@ class PraticiensController extends AppController
         return $this->redirect(['action' => 'index']);
     }
     public function prat(){
-         $url=WWW_ROOT.'annuaires/praticiens.json';
+         $url=WWW_ROOT.'annuaires/annuaire_ffhtb.json';
         $content=file_get_contents($url);
         $json=json_decode(str_replace("var data = ", "", $content));
         $tab=array();
@@ -126,15 +127,79 @@ class PraticiensController extends AppController
             if (!$prat) {
                 $praticien = $this->Praticiens->newEntity();
                 $array = array();
-                $praticien->nom = $value->nomPrenom;
-                $praticien->niveau = $value->formation;
-                $praticien->annee_certif = $value->annee;
-                $praticien->pays = $value->pays;
+                $praticien->in_annuaire=1;
+                    $praticien->nom = $value->nomPrenom;
+                if(isset($value->formation))
+                    $praticien->niveau = $value->formation;
+                else
+                    $praticien->niveau=null;
+                if(isset($value->annee))
+                    $praticien->annee_certif = $value->annee;
+                else
+                    $praticien->annee_certif=null;
+                if(isset($value->pays))
+                    $praticien->pays = $value->pays;
+                else
+                    $praticien->pays=null;
+                if(isset($value->ville))
+                    $praticien->ville= $value->ville;
+                else
+                    $praticien->ville=null;
+                if(isset($value->adresse))
+                    $praticien->adresse=$value->adresse;
+                else
+                    $praticien->adresse=null;
+                if(isset($value->tel))
+                    $praticien->telephone=$value->tel;
+                else
+                    $praticien->telephone=null;
+                if(isset($value->email))
+                    $praticien->email=$value->email;
+                else
+                    $praticien->email=null;
+                if(isset($value->specialite))
+                    $praticien->specialite=$value->specialite;
+                else
+                    $praticien->specialite=null;
                 $praticiens[] = $praticien;
             }
         }
                 dump($this->Praticiens->saveMany($praticiens));
-                
+                die();
         return;
     }
+   /* public function exportPrat($id=null){
+        $praticien=$this->Praticiens->find()->where(['id'=>$id])
+            ->first();
+        $tab=array();
+        $count=count($praticien);
+        $tab['count']=$count;
+            $tab['annuaire'][$praticien->id]['nomPrenom']=$praticien->nom;
+            $tab['annuaire'][$praticien->id]['adresse']=$praticien->adresse;
+            $tab['annuaire'][$praticien->id]['formation']=$praticien->niveau;
+            $tab['annuaire'][$praticien->id]['ville']=$praticien->ville;
+            $tab['annuaire'][$praticien->id]['annee']=$praticien->annee_certif;
+            $tab['annuaire'][$praticien->id]['pays']=$praticien->pays;
+
+
+        file_put_contents(WWW_ROOT.'annuaires/annuaire_prat.json', json_encode($tab));
+
+        $path = "/web/wp-content/plugins/psyclick/data/";
+
+        $conn_id = ftp_connect("psynapse.fr");
+        $ftp_user_name = "c3_2018";
+        $ftp_user_pass = "XpREf1Ywl6_";
+        $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+        ftp_pasv($conn_id, true) ;
+        $tmp = WWW_ROOT.'annuaires/annuaire_prat.json';
+
+        @ftp_delete($conn_id, $path."annuaire_prat.json");
+        if(ftp_put($conn_id, $path."annuaire_prat.json", $tmp, FTP_BINARY)){
+            return $this->redirect(['action' => 'index']);
+        }else{
+            return $this->redirect(['action' => 'view', $praticien->id]);
+        }
+
+
+    }*/
 }

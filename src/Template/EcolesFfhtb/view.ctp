@@ -5,15 +5,18 @@
  */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
+
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Ecoles Ffhtb'), ['action' => 'edit', $ecolesFfhtb->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Ecoles Ffhtb'), ['action' => 'delete', $ecolesFfhtb->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ecolesFfhtb->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Ecoles Ffhtb'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Ecoles Ffhtb'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
-    </ul>
+        <?php if($this->Session->read('Auth.User.id')==$ecolesFfhtb->user->id || $this->Session->read('Auth.User.role')=='admin'): ?>
+        <li><?= $this->Html->link(__('Modifier Ecoles Ffhtb'), ['action' => 'edit', $ecolesFfhtb->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Supprimer Ecoles Ffhtb'), ['action' => 'delete', $ecolesFfhtb->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ecolesFfhtb->id)]) ?> </li>
+        <?php endif;?>
+        <li><?= $this->Html->link(__('Liste des Ecoles Ffhtb'), ['action' => 'index']) ?> </li>
+        <?php if($this->Session->read('Auth.User.role')=='admin'): ?>
+        <li><?= $this->Html->link(__('Nouvelle Ecoles Ffhtb'), ['action' => 'add']) ?> </li>
+        <?php endif; ?>
+
 </nav>
 <div class="ecolesFfhtb view large-9 medium-8 columns content">
     <h3><?= h($ecolesFfhtb->id) ?></h3>

@@ -9,6 +9,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $country_id
  * @property int $is_referant
+ * @property string $civilite
  * @property string $nom
  * @property string $email
  * @property string $title
@@ -26,6 +27,7 @@ use Cake\ORM\Entity;
  * @property string $lat
  * @property string $lng
  * @property string $domaines
+ * @property int $in_ffhtb
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  */
@@ -44,6 +46,7 @@ class Membre extends Entity
     protected $_accessible = [
         'country_id' => true,
         'is_referant' => true,
+        'civilite'=>true,
         'nom' => true,
         'email'=>true,
         'title' => true,
@@ -61,6 +64,7 @@ class Membre extends Entity
         'lat' => true,
         'lng' => true,
         'domaines' => true,
+        'in_ffhtb' =>true,
         'created' => true,
         'modified' => true
     ];

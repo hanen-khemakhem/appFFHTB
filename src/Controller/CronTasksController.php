@@ -13,13 +13,13 @@ namespace App\Controller;
  */
 class CronTasksController extends AppController
 {
-    function exportMembresFFHTB(){
+    /*function exportMembresFFHTB(){
         $this->loadModel('Membres');
         $controller = $this->request->getQuery('controller');
         $action = $this->request->getQuery('action');
         $this->CronTasks->membreJson($controller,$action);
 
-    }
+    }*/
     function exportPraticiensFFHTB(){
         $this->loadModel('Praticiens');
         $controller = $this->request->getQuery('controller');

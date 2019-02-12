@@ -11,6 +11,12 @@ use Cake\ORM\Entity;
  * @property string $niveau
  * @property string $annee_certif
  * @property string $pays
+ * @property string $adresse
+ * @property string $ville
+ * @property string $telephone
+ * @property string $email
+ * @property string $specialite
+ * @property int $in_annuaire
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  */
@@ -31,6 +37,12 @@ class Praticien extends Entity
         'niveau' => true,
         'annee_certif' => true,
         'pays' => true,
+        'adresse'=>true,
+        'ville'=>true,
+        'telephone'=>true,
+        'email'=>true,
+        'specialite'=>true,
+        'in_annuaire'=>true,
         'created' => true,
         'modified' => true
     ];

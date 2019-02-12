@@ -45,6 +45,7 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Auth',[
+            'authorize' => 'Controller',
             'authenticate'=>[
                 'Form'=>[
                     'fields'=>[
@@ -56,7 +57,15 @@ class AppController extends Controller
                 'loginAction'=>[
                     'controller'=>'Users',
                     'action'=>'login'
-                ]
+                ],
+            'logoutRedirect' => [
+                'controller' => 'Membres',
+                'action' => 'index'
+            ],
+            'allowedActions' => [
+                'controller' => 'Users',
+                'action' => 'logout'
+            ]
             ]);
 
         /*
@@ -65,13 +74,33 @@ class AppController extends Controller
          */
         //$this->loadComponent('Security');
     }
+    public function isAuthorized($user = null)
+    {
+
+        if ((bool)($user['role'] === 'ecole')){
+            switch ($this->request->getParam('controller')){
+                case 'EcolesFfhtb':
+                    return true;
+                case 'Praticiens':
+                    return true;
+                case 'Users':
+                    if($this->request->getParam('action')=='logout')
+                        return true;
+                    else
+                        return false;
+                default:
+                    return false;
+            }
+        }
+            return (bool)($user['role'] === 'admin');
+    }
     public function login()
     {
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
-                return $this->redirect(['controller'=>'Membres','action'=>'index']);
+                return $this->redirect(['controller'=>'Praticiens','action'=>'index']);
             }
 
             $this->Flash->error(__('Votre identifiant ou votre mot de passe est incorrect'));
@@ -112,7 +141,4 @@ class AppController extends Controller
         // Par défaut refuser
         return false;
     }*/
-    public function beforeFilter(Event $event){
-        $this->viewBuilder()->setLayout('login');
-    }
 }
