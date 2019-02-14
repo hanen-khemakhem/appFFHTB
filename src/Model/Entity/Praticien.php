@@ -7,12 +7,14 @@ use Cake\ORM\Entity;
  * Praticien Entity
  *
  * @property int $id
+ * @property int $user_id
  * @property string $nom
  * @property string $niveau
  * @property string $annee_certif
  * @property string $pays
  * @property string $adresse
  * @property string $ville
+ * @property string $codepostal
  * @property string $telephone
  * @property string $email
  * @property string $specialite
@@ -33,12 +35,14 @@ class Praticien extends Entity
      * @var array
      */
     protected $_accessible = [
+        'user_id'=>true,
         'nom' => true,
         'niveau' => true,
         'annee_certif' => true,
         'pays' => true,
         'adresse'=>true,
         'ville'=>true,
+        'codepostal'=>true,
         'telephone'=>true,
         'email'=>true,
         'specialite'=>true,

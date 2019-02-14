@@ -20,8 +20,10 @@ class PraticiensController extends AppController
      */
     public function index()
     {
-        $praticiens = $this->paginate($this->Praticiens);
-
+        if($this->Auth->user('role')=='ecole')
+        $praticiens = $this->paginate($this->Praticiens->find()->where(['user_id'=>$this->Auth->user('id')]));
+        else if($this->Auth->user('role')=='admin' || $this->Auth->user('id')=='null')
+            $praticiens = $this->paginate($this->Praticiens);
         $this->set(compact('praticiens'));
     }
 
@@ -51,15 +53,22 @@ class PraticiensController extends AppController
         $praticien = $this->Praticiens->newEntity();
         if (!empty($this->request->getData())) {
             $praticien = $this->Praticiens->patchEntity($praticien, $this->request->getData());
+
+            $praticien->user_id=$this->Auth->user('id');
+            if($this->Auth->user('role')=='ecole')
+            $praticien->in_ecole=1;
+            else
+                $praticien->in_ecole=0;
             if ($this->Praticiens->save($praticien)) {
                 $this->Flash->success(__('Praticien ajouté.'));
 
-                return $this->redirect(['action' => 'view',$praticien->id]);
+                return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('impossible d\'ajouter le praticien.'));
         }
+        $specialites=$this->Praticiens->specialites;
         $Pays=$this->Praticiens->pays;
-        $this->set(compact('praticien','Pays'));
+        $this->set(compact('praticien','Pays','specialites'));
     }
 
     /**
@@ -83,8 +92,9 @@ class PraticiensController extends AppController
             }
             $this->Flash->error(__('Enregistrement impossible.'));
         }
+        $specialites=$this->Praticiens->specialites;
         $Pays=$this->Praticiens->pays;
-        $this->set(compact('praticien','Pays'));
+        $this->set(compact('praticien','Pays','specialites'));
     }
 
     /**
@@ -127,6 +137,8 @@ class PraticiensController extends AppController
             if (!$prat) {
                 $praticien = $this->Praticiens->newEntity();
                 $array = array();
+                $praticien->user_id=null;
+                $praticien->codepostal=null;
                 $praticien->in_annuaire=1;
                     $praticien->nom = $value->nomPrenom;
                 if(isset($value->formation))

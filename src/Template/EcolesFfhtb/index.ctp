@@ -10,6 +10,7 @@
             __('Actions') ?></li>
         <!--<li><?/*= $this->Html->link(__('Liste des membres'), ['controller'=>'membres','action' => 'index']) */?></li>-->
         <li><?= $this->Html->link(__('Liste des praticiens'), ['controller'=>'praticiens','action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Ajouter un nouveau praticien'), ['controller'=>'praticiens','action' => 'add']) ?></li>
         <?php if($this->Session->read('Auth.User.role')=="admin"):?>
             <li><?= $this->Html->link(__('Ajouter une nouvelle école'), ['action' => 'add']) ?></li>
             <li><?= $this->Html->link(__('Liste des utilisateurs'), ['controller' => 'Users', 'action' => 'index']) ?></li>
@@ -17,13 +18,11 @@
     </ul>
 </nav>
 <div class="ecolesFfhtb index large-9 medium-8 columns content">
-    <h3><?= __('Ecoles Ffhtb') ?></h3>
+    <h3><?= __('Liste des Ecoles Ffhtb') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('nom d\'utilisateur ') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('mot de passe') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('nom') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('logo') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('adresse') ?></th>
@@ -41,8 +40,6 @@
             <?php foreach ($ecolesFfhtb as $ecolesFfhtb): ?>
             <tr>
                 <td><?= $this->Number->format($ecolesFfhtb->id) ?></td>
-                <td><?= $ecolesFfhtb->has('user') ?h($ecolesFfhtb->user->username): '' ?></td>
-                <td><?= $ecolesFfhtb->has('user') ?h($ecolesFfhtb->user->password): '' ?></td>
                 <td><?= h($ecolesFfhtb->nom) ?></td>
                 <td><?= h($ecolesFfhtb->logo) ?></td>
                 <td><?= h($ecolesFfhtb->adresse) ?></td>
@@ -55,12 +52,9 @@
                 <td><?= h($ecolesFfhtb->site) ?></td>
 
                 <td class="actions">
-                    <?php if($this->Session->read('Auth.User.id')==$ecolesFfhtb->user->id ||$this->Session->read('Auth.User.role')=='admin'): ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $ecolesFfhtb->id]) ?>
-
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $ecolesFfhtb->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ecolesFfhtb->id)]) ?>
-                    <?php endif;?>
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $ecolesFfhtb->id]) ?>
+                    <?= $this->Html->link(__('Voir'), ['action' => 'view', $ecolesFfhtb->id]) ?>
+                    <?= $this->Html->link(__('Modifier'), ['action' => 'edit', $ecolesFfhtb->id]) ?>
+                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $ecolesFfhtb->id], ['confirm' => __('Voulez-vous supprimer l\'école # {0}?', $ecolesFfhtb->id)]) ?>
                 </td>
 
             </tr>
@@ -69,12 +63,12 @@
     </table>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->first('<< ' . __('premier')) ?>
+            <?= $this->Paginator->prev('< ' . __('précédent')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->next(__('suivant') . ' >') ?>
+            <?= $this->Paginator->last(__('dernier') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+        <!--<p><?/*= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) */?></p>-->
     </div>
 </div>

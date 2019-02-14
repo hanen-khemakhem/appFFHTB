@@ -78,8 +78,10 @@ class UsersController extends AppController
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                if($user->role=='admin')
+                    return $this->redirect(['action' => 'index']);
+                else
+                    return $this->redirect(['controller'=>'praticiens','action' => 'index']);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
@@ -123,10 +125,11 @@ class UsersController extends AppController
             $this->Flash->error(__('Votre identifiant ou votre mot de passe est incorrect'));
         }
 
-       // $this->viewBuilder()->setLayout('login');
+        $this->viewBuilder()->setLayout('login');
     }
     public function logout()
     {
+        $this->viewBuilder()->setLayout('login');
         return $this->redirect($this->Auth->logout());
     }
 }

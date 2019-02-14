@@ -3,6 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Praticien $praticien
  * @var $Pays
+ * @var $specialites
  */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
@@ -25,12 +26,14 @@
      <h3>Compléments</h3>
     <?php
     echo $this->V->input('niveau',array('label'=>"Niveau de cértification"));
-    echo $this->V->input('specialite',array('label'=>"Spécialité"));
+    echo $this->V->input('specialite',array('label'=>"Spécialité",'type'=>'select','options'=>$specialites));
     echo $this->V->input('annee_certif',array('label'=>['text' => "Année de cértification <small>(Ex: 2019)</small>",'escape' => false]));
     echo $this->V->input('pays',array('label'=>"Pays",'type'=>'select','options'=>$Pays));
     echo $this->V->input('adresse',array('label'=>"Adresse"));
     echo $this->V->input('ville',array('label'=>"Ville"));
+    echo $this->V->input('codepostal',array('label'=>"Code postal"));
    
     ?>
 
     <?= $this->Form->button('Valider ') ?>
+    <?= $this->Form->end();?>

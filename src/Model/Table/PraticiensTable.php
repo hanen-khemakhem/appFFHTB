@@ -56,6 +56,10 @@ class PraticiensTable extends Table
             ->scalar('nom')
             ->maxLength('nom', 255)
             ->notEmpty('nom');
+        $validator
+            ->integer('user_id')
+            ->requirePresence('user_id', 'create')
+            ->allowEmpty('user_id');
 
         $validator
             ->scalar('niveau')
@@ -81,6 +85,10 @@ class PraticiensTable extends Table
             ->maxLength('ville', 255)
             ->allowEmpty('ville');
         $validator
+            ->scalar('codepostal')
+            ->maxLength('codepostal', 10)
+            ->allowEmpty('codepostal');
+        $validator
             ->scalar('telephone')
             ->maxLength('telephone', 255)
             ->allowEmpty('telephone');
@@ -96,6 +104,7 @@ class PraticiensTable extends Table
 
         return $validator;
     }
+
     var $pays=array("France (métropole)"=>"France (métropole)",
         'Corse'=>'Corse',
         'Guadeloupe'=>'Guadeloupe',
@@ -325,4 +334,9 @@ class PraticiensTable extends Table
         'Wallis et Futuna'=>'Wallis et Futuna'
 
     );
+    var $specialites=[
+        'HE'=>'Hypnose Ericksonienne',
+        'TBS'=>'Thérapie Brève Systèmique',
+        'TBI'=>'Thérapie Brève Intégrative'
+        ];
 }

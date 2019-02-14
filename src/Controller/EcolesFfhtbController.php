@@ -24,7 +24,10 @@ class EcolesFfhtbController extends AppController
         $this->paginate = [
             'contain' => ['Users']
         ];
-        $ecolesFfhtb = $this->paginate($this->EcolesFfhtb);
+        if($this->Auth->user('role')=='ecole')
+        $ecolesFfhtb = $this->paginate($this->EcolesFfhtb->find()->where(['user_id'=>$this->Auth->user('id')]));
+        else if($this->Auth->user('role')=='admin' || $this->Auth->user('id')=='null')
+            $ecolesFfhtb = $this->paginate($this->EcolesFfhtb);
 
         $this->set(compact('ecolesFfhtb'));
     }
