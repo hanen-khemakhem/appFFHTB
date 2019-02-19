@@ -5,22 +5,41 @@
  * @var $userTypes
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Liste des Utilisateurs'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="users form large-9 medium-8 columns content">
-    <?= $this->Form->create($user) ?>
-    <fieldset>
-        <legend><?= __('Ajouter un utilisateur') ?></legend>
-        <?php
-            echo $this->Form->control('username',['label'=>'Identiafiant']);
-            echo $this->Form->control('password',['label'=>'Mot de passe']);
-            echo $this->Form->control('role', ['label' => 'Role', 'class' => 'ui-widget-content ui-corner-all', 'options' => $userTypes, 'empty' => true]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Valider')) ?>
-    <?= $this->Form->end() ?>
+<div class="row">
+<div class="col-lg-12">
+    <div class="panel panel-default">
+        <div class="panel-heading"> Ajouter un utilisateur </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-12">
+                <?= $this->Form->create($user) ?>
+                <div class="col-lg-12">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <?php echo $this->Form->control('username',['label'=>'Identiafiant','class'=>'form-control','placeholder'=>'Entrez votre identifiant']); ?>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                        <?php echo $this->Form->control('password',['label'=>'Mot de passe','class'=>'form-control','placeholder'=>'Entrez votre mot de passe']); ?>
+
+                    </div>
+                    </div>
+                </div>
+                    <div class="col-lg-12">
+                        <div class="col-lg-12 form-group">
+                            <?php echo $this->Form->control('role', ['label' => 'Role', 'class' => 'form-control', 'options' => $userTypes, 'empty' => true]);?>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                    <?= $this->Form->button(__('Valider'),['class'=>'btn btn-primary']) ?>
+                    <?= $this->Form->button(__('Annuler'),['class'=>'btn btn-danger','type'=>'reset']) ?>
+                    </div>
+                        <?= $this->Form->end() ?>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

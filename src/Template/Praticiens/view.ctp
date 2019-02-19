@@ -4,35 +4,52 @@
  * @var \App\Model\Entity\Praticien $praticien
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Liste des praticiens'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('Modifier praticien'), ['action' => 'edit', $praticien->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Supprimer praticien'), ['action' => 'delete', $praticien->id], ['confirm' => __('Are you sure you want to delete # {0}?', $praticien->id)]) ?> </li>
-        <li><?= $this->Html->link(__('Nouveau praticien'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="praticiens view large-9 medium-8 columns content">
-    <h3><?= h($praticien->nom) ?></h3>
-    <table class="vertical-table">
 
-        <tr>
-            <th scope="row"><?= __('Formation') ?></th>
-            <td><?= h($praticien->niveau) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Adresse') ?></th>
-            <td><?= h($praticien->adresse).", ".h($praticien->ville).", ".h($praticien->pays) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Année de Certification') ?></th>
-            <td><?= h($praticien->annee_certif) ?></td>
-        </tr>
+<div class="row">
+    <div class="col-lg-12 ">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="page-header small">
+                    <div class="page-header small"><?= h($praticien->nom) ?>
 
-    </table>
-    <?php
-/*    echo $this->Html->link("Ajouter dans l'annuaire ffhtb",
-        array('controller' => 'Praticiens','action'=> 'exportPrat', $praticien->id),
-        array( 'class' => 'button'));*/?>
+                </h1>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12">
+
+                <div class="clearfix"></div>
+                <dl class="dl-horizontal">
+                    <dt>Email</dt>
+                    <dd><?= h($praticien->email) ?></dd>
+                    <dt>Téléphone</dt>
+                    <dd><?= h($praticien->telephone) ?></dd>
+                    <dt>Formation</dt>
+                    <dd><?= h($praticien->niveau) ?></dd>
+                    <dt>Année</dt>
+                    <dd><?= h($praticien->annee_certif) ?></dd>
+                    <dt>Adresse</dt>
+                    <dd><?= h($praticien->adresse).' ,'.h($praticien->ville).' ,'.h($praticien->codepostal).' ,'.h($praticien->pays) ?></dd>
+                </dl>
+            </div>
+            <div class="col-lg-12 photolist">
+                <div class="row pull-right">
+                    <?= $this->Html->link(
+                        '<span class="fa fa-edit"></span>' . __(' Modifier'),
+                        ['action' => 'edit', $praticien->id],
+                        ['escape' => false,
+                            'class' => 'btn btn-default']
+                    ) ?>
+                    <?= $this->Html->link(
+                        '<span class="fa fa-trash-o"></span>' . __(' Supprimer'),
+                        ['action' => 'edit', $praticien->id],
+                        ['escape' => false,
+                            'class' => 'btn btn-default',
+                            'confirm' => __('Voulez-vous supprimer l\'adhérent # {0}?', $praticien->id)]
+                    ) ?>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
 </div>

@@ -1,69 +1,64 @@
-<!-- <h3>Identification</h3>
 <?php
-/*echo $this->Flash->render();*/
-echo $this->Form->create();
-echo $this->V->input('username', array('label' => "Login"));
-echo $this->V->input('password', array('label' => "Mot de passe"));
 ?>
-<?= $this->Form->button('Connexion') ?>
-<?php 
-echo $this->Form->end();
-?> -->
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <?= $this->Html->charset() ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <?= $cakeDescription ?>:
+        <?= $this->fetch('title') ?>
+    </title>
+    <?= $this->Html->meta('icon') ?>
+    <?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700')?>
+    <?php echo $this->Html->css('adminnine.css')?>
 
-<body>
-    <div id="login">
-       
-        <div class="container">
-            <div id="login-row" class="row justify-content-center align-items-center">
-                <div id="login-column" class="col-md-6">
-                    <div id="login-box" class="col-md-12">
-                      
-                            <?= $this->Form->create();?>
-                            <h3 class="text-center text-info">Authentification</h3>
-                            <div class="form-group">
-                                <label for="username" class="text-info">Login:</label><br>
-                                <input type="text" name="username" id="username" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="text-info">Mot de passe:</label><br>
-                                <input type="password" name="password" id="password" class="form-control">
-                            </div>
-                            <div class="form-group">
-                               
-                                <?= $this->Form->button('Connexion',array('class'=>'btn btn-info btn-md')) ?>
+    <!-- Bootstrap Core CSS -->
+    <?php echo $this->Html->css('bootstrap/css/bootstrap.min.css')?>
+    <!-- Morris Charts CSS -->
+    <?php echo $this->Html->css('morrisjs/morris.css')?>
+    <!-- jvectormap CSS -->
+    <?php echo $this->Html->css('jquery-jvectormap/jquery-jvectormap-2.0.3.css')?>
+    <!-- Custom CSS -->
 
+    <!-- Custom Fonts -->
+    <?php echo $this->Html->css('font-awesome/css/font-awesome.min.css')?>
+</head>
+
+<body class="loginpages">
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-6">
+            <div class="login-panel panel panel-default">
+                <div class="userpic"><img src="../img/default_profile.png" alt="" ></div>
+                <div class="panel-body">
+                    <h2 class="text-center">Authentification</h2>
+                    <?= $this->Form->create();?>
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Votre identifiant" name="username" type="text" autofocus>
                             </div>
-                        <?php 
-						echo $this->Form->end();
-						?>
-                    </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="votre mot de passe" name="password" type="password" value="">
+                            </div>
+                            <br>
+                            <!-- Change this to a button or input when using this as a form -->
+                            <!--<a href="index.html" class="btn btn-lg btn-primary btn-block">Login</a>-->
+                            <?= $this->Form->button('Connexion',array('class'=>'btn btn-lg btn-primary btn-block')) ?>
+                        </fieldset>
+
+                    <?php
+                    echo $this->Form->end();
+                    ?>
                 </div>
             </div>
         </div>
     </div>
+
+<!-- jQuery -->
+<?php echo $this->Html->script('jquery/jquery.min.js')?>
+<?php echo $this->Html->script('adminnine.js')?>
+<?php echo $this->Html->script('bootstrap/js/bootstrap.min.js')?>
 </body>
-<style>
-	body {
-  margin: 0;
-  padding: 0;
-  
-  height: 100vh;
-}
-#login .container #login-row #login-column #login-box {
-  margin-top: 120px;
-  max-width: 600px;
-  height: 320px;
-  border: 1px solid #9C9C9C;
-  background-color: #EAEAEA;
-}
-#login .container #login-row #login-column #login-box #login-form {
-  padding: 20px;
-}
-#login .container #login-row #login-column #login-box #login-form #register-link {
-  margin-top: -85px;
-}
+</html>
 </style>

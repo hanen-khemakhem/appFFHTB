@@ -4,43 +4,51 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
-<?php if($this->Session->read('Auth.User.role')=="admin"):?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit User'), ['action' => 'edit', $user->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="users view large-9 medium-8 columns content">
-    <h3><?= h($user->id) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('Username') ?></th>
-            <td><?= h($user->username) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Password') ?></th>
-            <td><?= h($user->password) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Role') ?></th>
-            <td><?= h($user->role) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($user->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Created') ?></th>
-            <td><?= h($user->created) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Modified') ?></th>
-            <td><?= h($user->modified) ?></td>
-        </tr>
-    </table>
+
+
+<div class="row">
+<div class="col-lg-12 ">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+           <h1 class="page-header small">
+            <div class="page-header small">Détails de l'utilisateur
+
+            </h1>
+            <p class="page-subtitle small">les informations visibles sont limitées</p>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-12">
+
+            <div class="clearfix"></div>
+            <dl class="dl-horizontal">
+                <dt>Id</dt>
+                <dd><?= $this->Number->format($user->id) ?></dd>
+                <dt>Identifiant</dt>
+                <dd><?= h($user->username) ?></dd>
+                <dt>Role</dt>
+                <dd><?= h($user->role) ?></dd>
+            </dl>
+        </div>
+        <div class="col-lg-12 photolist">
+            <div class="row pull-right">
+                <?= $this->Html->link(
+                    '<span class="fa fa-edit"></span>' . __(' Modifier'),
+                    ['action' => 'edit', $user->id],
+                    ['escape' => false,
+                        'class' => 'btn btn-default']
+                ) ?>
+                <?php if($this->Session->read('Auth.User.id')!=$user->id)
+                echo $this->Html->link(
+                    '<span class="fa fa-trash-o"></span>' . __(' Supprimer'),
+                    ['action' => 'edit', $user->id],
+                    ['escape' => false,
+                        'class' => 'btn btn-default',
+                        'confirm' => __('Voulez-vous supprimer l\'utilisateur # {0}?', $user->id)]
+                ) ?>
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
 </div>
-<?php endif;?>
+</div>

@@ -21,6 +21,7 @@ class EcolesFfhtbController extends AppController
      */
     public function index()
     {
+        $this->loadModel('EcolesFfhtb');
         $this->paginate = [
             'contain' => ['Users']
         ];
@@ -41,10 +42,14 @@ class EcolesFfhtbController extends AppController
      */
     public function view($id = null)
     {
+        $this->loadModel('EcolesFfhtb');
         $ecolesFfhtb = $this->EcolesFfhtb->get($id, [
             'contain' => ['Users']
         ]);
-
+        if(($ecolesFfhtb->user_id!=$this->Auth->user('id') && $this->Auth->user('role')=='ecole') ){
+            $this->Flash->error(__('The ecoles ffhtb could not be saved. Please, try again.'));
+            return $this->redirect(['action' => 'index']);
+        }
         $this->set('ecolesFfhtb', $ecolesFfhtb);
     }
 
@@ -55,7 +60,7 @@ class EcolesFfhtbController extends AppController
      */
     public function add()
     {
-        $this->loadModel('Users');
+        $this->loadModel('EcolesFfhtb');
         $ecolesFfhtb = $this->EcolesFfhtb->newEntity();
         if ($this->request->is('post')) {
             $ecolesFfhtb = $this->EcolesFfhtb->patchEntity($ecolesFfhtb, $this->request->getData());
@@ -88,11 +93,19 @@ class EcolesFfhtbController extends AppController
      */
     public function edit($id = null)
     {
+        $this->loadModel('EcolesFfhtb');
         $ecolesFfhtb = $this->EcolesFfhtb->get($id, [
             'contain' => []
         ]);
+
+        if(($ecolesFfhtb->user_id!=$this->Auth->user('id') && $this->Auth->user('role')=='ecole') ){
+            $this->Flash->error(__('The ecoles ffhtb could not be saved. Please, try again.'));
+            return $this->redirect(['action' => 'index']);
+        }
         if ($this->request->is(['patch', 'post', 'put'])) {
             $ecolesFfhtb = $this->EcolesFfhtb->patchEntity($ecolesFfhtb, $this->request->getData());
+
+
             if ($this->EcolesFfhtb->save($ecolesFfhtb)) {
                 $this->Flash->success(__('The ecoles ffhtb has been saved.'));
 
@@ -114,8 +127,13 @@ class EcolesFfhtbController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->loadModel('EcolesFfhtb');
+        //$this->request->allowMethod(['post', 'delete']);
         $ecolesFfhtb = $this->EcolesFfhtb->get($id);
+        if(($ecolesFfhtb->user_id!=$this->Auth->user('id') && $this->Auth->user('role')=='ecole') ){
+            $this->Flash->error(__('The ecoles ffhtb could not be saved. Please, try again.'));
+            return $this->redirect(['action' => 'index']);
+        }
         if ($this->EcolesFfhtb->delete($ecolesFfhtb)) {
             $this->Flash->success(__('The ecoles ffhtb has been deleted.'));
         } else {

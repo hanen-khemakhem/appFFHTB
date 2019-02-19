@@ -1,8 +1,6 @@
 <?php
 namespace App\Controller;
 
-use App\Controller\AppController;
-use Cake\ORM\TableRegistry;
 
 /**
  * Praticiens Controller
@@ -106,7 +104,7 @@ class PraticiensController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        //$this->request->allowMethod(['post', 'delete']);
         $praticien = $this->Praticiens->get($id);
         if ($this->Praticiens->delete($praticien)) {
             $this->Flash->success(__('The praticien has been deleted.'));

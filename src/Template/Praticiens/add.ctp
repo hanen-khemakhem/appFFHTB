@@ -6,42 +6,100 @@
  * @var $specialites
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Liste des adhérents'), ['action' => 'index']) ?></li>
 
-    </ul>
-</nav>
-<div class="membres form large-9 medium-8 columns content">
-    <?php if($this->Session->read('Auth.User.role')=="admin"):?>
-    <h2>Ajouter un praticien</h2>
-    <?php else: ?>
-        <h2>Ajouter un adhérent</h2>
-    <?php endif;?>
- <?= $this->Form->create($praticien) ?>
-<fieldset class="pano bleu">
-    <h3>Informations générales</h3>
-    <?php
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"> Ajouter un Adhérent </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <?= $this->Form->create($praticien) ?>
+                            <div class="col-lg-12">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <?php echo $this->Form->control('nom',['label'=>'Nom et prénom','class'=>'form-control','placeholder'=>'Entrez votre nom']); ?>
 
-    echo $this->V->input('nom',array('label'=>"Nom et Prénom du praticien"));
-    echo $this->V->input('email',array('label'=>"Email"));
-    echo $this->V->input('telephone',array('label'=>"Numéro de téléphone"));
-echo $this->V->input('in_annuaire',array('label'=>'Voulez-vous ajouter à l\'annuaire FFHTB?','type'=>'checkbox','default'=>0));
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <?php echo $this->Form->control('email',['label'=>'Email','class'=>'form-control','placeholder'=>'exemple@yahoo.fr']); ?>
 
-    ?>
-     <h3>Compléments</h3>
-    <?php
-     echo $this->V->input('niveau',array('label'=>"Niveau de cértification"));
-    echo $this->V->input('specialite',array('label'=>"Spécialité",'type'=>'select','options'=>$specialites,'empty'=>true));
-      echo $this->V->input('annee_certif',array('label'=>['text' => "Année de cértification <small>(Ex: 2019)</small>",'escape' => false]));
-      echo $this->V->input('pays',array('label'=>"Pays",'type'=>'select','options'=>$Pays));
-        echo $this->V->input('adresse',array('label'=>"Adresse"));
-        echo $this->V->input('ville',array('label'=>"Ville"));
-        echo $this->V->input('codepostal',array('label'=>"Code postal"));
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <?php echo $this->Form->control('telephone',['label'=>'Numéro de télephone','class'=>'form-control','placeholder'=>'12 34 56 789']); ?>
 
-    ?>
-    <?= $this->Form->button('Valider ') ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class=" col-lg-12 form-group">
+                                    <?php echo $this->Form->control('in_annuaire',
+                                        array('label'=>'Voulez-vous ajouter à l\'annuaire FFHTB?',
+                                            'type'=>'checkbox','default'=>0,'class'=>'checkbox-inline')); ?>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <?php echo $this->Form->control('niveau',['label'=>'Niveau de cerification','class'=>'form-control']); ?>
 
-<?= $this->Form->end(); ?>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="col-lg-4 form-group">
+                                        <?php echo $this->Form->control('specialite', ['label' => 'Spécialité', 'class' => 'form-control', 'options' => $specialites, 'empty' => true]);?>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <?php echo $this->Form->control('annee_certif',['label'=>'Année de cértification','class'=>'form-control','placeholder'=>'2019']); ?>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <?php echo $this->Form->control('adresse',['label'=>'Adresse','class'=>'form-control']); ?>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <?php echo $this->Form->control('ville',['label'=>'Ville','class'=>'form-control']); ?>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <?php echo $this->Form->control('pays',['label'=>'Pays','class'=>'form-control','options' => $Pays]); ?>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <?php echo $this->Form->control('codepostal',['label'=>'Code postal','class'=>'form-control']); ?>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <?= $this->Form->button(__('Valider'),['class'=>'btn btn-primary']) ?>
+                                <?= $this->Form->button(__('Annuler'),['class'=>'btn btn-danger','type'=>'reset']) ?>
+                            </div>
+                            <?= $this->Form->end() ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 

@@ -5,28 +5,30 @@
  */
 ?>
 
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Ajouter un utilisateur'), ['action' => 'add']) ?></li>
-        <!--<li><?/*= $this->Html->link(__('Liste des membres'), ['controller'=>'membres','action' => 'index']) */?></li>-->
-        <li><?= $this->Html->link(__('Liste des praticiens'), ['controller'=>'praticiens','action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Liste des écoles FFHTB'), ['controller'=>'ecolesFfhtb','action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="users index large-9 medium-8 columns content">
-    <h3><?= __('Liste des Utilisateurs') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('username','Identifiant') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('password','Mot de passe') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('role') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table dataTable no-footer dtr-inline" id="dataTables-userlist" role="grid"
+               aria-describedby="dataTables-userlist_info" style="width: 1819px;">
+            <thead>
+            <tr role="row">
+                <th class="sorting_asc" tabindex="0" aria-controls="dataTables-userlist" rowspan="1" colspan="1"
+                    aria-sort="ascending" aria-label="User : activate to sort column descending"
+                    style="width: 256px;"><?= $this->Paginator->sort('id') ?></th>
+                <th class="sorting_asc" tabindex="0" aria-controls="dataTables-userlist" rowspan="1" colspan="1"
+                    aria-sort="ascending" aria-label="User : activate to sort column descending"
+                    style="width: 256px;"><?= $this->Paginator->sort('username','Identifiant') ?></th>
+                <th class="sorting_asc" tabindex="0" aria-controls="dataTables-userlist" rowspan="1" colspan="1"
+                    aria-sort="ascending" aria-label="User : activate to sort column descending"
+                    style="width: 256px;"><?= $this->Paginator->sort('password','Mot de passe') ?></th>
+                <th class="sorting_asc" tabindex="0" aria-controls="dataTables-userlist" rowspan="1" colspan="1"
+                    aria-sort="ascending" aria-label="User : activate to sort column descending"
+                    style="width: 256px;"><?= $this->Paginator->sort('role') ?></th>
+                <th class="sorting_asc" tabindex="0" aria-controls="dataTables-userlist" rowspan="1" colspan="1"
+                    aria-sort="ascending" aria-label="User : activate to sort column descending"
+                    style="width: 256px;"><?= __('Actions') ?></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody role="row">
             <?php foreach ($users as $user): ?>
             <tr>
                 <td><?= $this->Number->format($user->id) ?></td>
@@ -34,22 +36,47 @@
                 <td><?= h($user->password) ?></td>
                 <td><?= h($user->role) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('Voir'), ['action' => 'view', $user->id]) ?>
-                    <?= $this->Html->link(__('Modifier'), ['action' => 'edit', $user->id]) ?>
-                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+                    <?= $this->Html->link(
+                        '<span class="fa fa-search"></span><span class="sr-only">' . __('View') . '</span>',
+                        ['action' => 'view', $user->id],
+                        ['escape' => false, 'class' => 'btn btn-circle btn-primary']
+                    ) ?>
+                    <?= $this->Html->link(
+                        '<span class="fa fa-edit"></span><span class="sr-only">' . __('edit') . '</span>',
+                        ['action' => 'edit', $user->id],
+                        ['escape' => false, 'class' => 'btn btn-circle btn-info']
+                    ) ?>
+
+                    <?php  if($this->Session->read('Auth.User.id')!=$user->id)
+                        echo $this->Html->link(
+                        '<span class="fa fa-trash-o"></span><span class="sr-only">' . __('Supprimer') . '</span>',
+                        ['action' => 'delete', $user->id],
+                        ['escape' => false,
+                            'class' => 'btn btn-circle btn-danger ',
+                            'confirm' => __('Voulez-vous supprimer l\'adhérent # {0}?', $user->id)]
+                    ) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('premier')) ?>
-            <?= $this->Paginator->prev('< ' . __('précédent')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('suivant') . ' >') ?>
-            <?= $this->Paginator->last(__('dernier') . ' >>') ?>
-        </ul>
-       <!-- <p><?/*= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) */?></p>-->
-    </div>
 </div>
+</div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="paginator dataTables_paginate paging_full_numbers">
+                <ul class="pagination">
+                    <?= $this->Paginator->first('<< ' . __('premier')) ?>
+                    <?= $this->Paginator->prev('< ' . __('précédent')) ?>
+                    <?= $this->Paginator->numbers() ?>
+                    <?= $this->Paginator->next(__('suivant') . ' >') ?>
+                    <?= $this->Paginator->last(__('dernier') . ' >>') ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+

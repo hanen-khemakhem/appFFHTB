@@ -6,37 +6,102 @@
  * @var $Pays
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $ecolesFfhtb->id],
-                ['confirm' => __('Voulez vous supprimer cette école?', $ecolesFfhtb->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('Liste des Ecoles Ffhtb'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="ecolesFfhtb form large-9 medium-8 columns content">
-    <?= $this->Form->create($ecolesFfhtb) ?>
-    <fieldset>
-        <legend><?= __('Edit Ecoles Ffhtb') ?></legend>
-        <?php
-           // echo $this->Form->control('user_id', ['options' => $users]);
-            echo $this->Form->control('nom');
-            echo $this->Form->control('logo');
-            echo $this->Form->control('adresse');
-            echo $this->Form->control('ville');
-            echo $this->Form->select('pays',['label'=>"Pays",'options'=>$Pays]);
-            echo $this->Form->control('code_postal');
-            echo $this->Form->control('telephone');
-            echo $this->Form->control('email');
-            echo $this->Form->control('presentation');
-            echo $this->Form->control('sujet');
-            echo $this->Form->control('site');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"> Ajouter une Ecole </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <?= $this->Form->create($ecolesFfhtb) ?>
+                        <div class="col-lg-12">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <?php echo $this->Form->control('nom',['label'=>'Nom de l\'école','class'=>'form-control','placeholder'=>'Entrez votre nom']); ?>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <?php echo $this->Form->control('email',['label'=>'Email','class'=>'form-control','placeholder'=>'exemple@yahoo.fr']); ?>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <?php echo $this->Form->control('telephone',['label'=>'Numéro de télephone','class'=>'form-control','placeholder'=>'12 34 56 789']); ?>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <?php echo $this->Form->control('logo',['label'=>'Logo de l\'école','class'=>'form-control']); ?>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <?php echo $this->Form->control('site',['label'=>'Site web','class'=>'form-control','placeholder'=>'http://']); ?>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <?php echo $this->Form->control('sujet',['label'=>'Sujet','class'=>'form-control']); ?>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="form-group">
+                                    <?php echo $this->Form->control('presentation',['label'=>'Présentation de l\'école','class'=>'form-control','type'=>'textarea']); ?>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <?php echo $this->Form->control('adresse',['label'=>'Adresse','class'=>'form-control']); ?>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <?php echo $this->Form->control('ville',['label'=>'Ville','class'=>'form-control']); ?>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <?php echo $this->Form->control('pays',['label'=>'Pays','class'=>'form-control','options' => $Pays]); ?>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <?php echo $this->Form->control('code_postal',['label'=>'Code postal','class'=>'form-control']); ?>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <?= $this->Form->button(__('Valider'),['class'=>'btn btn-primary']) ?>
+                            <?= $this->Form->button(__('Annuler'),['class'=>'btn btn-danger','type'=>'reset']) ?>
+                        </div>
+                        <?= $this->Form->end() ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

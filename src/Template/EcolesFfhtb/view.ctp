@@ -4,82 +4,60 @@
  * @var \App\Model\Entity\EcolesFfhtb $ecolesFfhtb
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
 
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <?php if($this->Session->read('Auth.User.id')==$ecolesFfhtb->user->id || $this->Session->read('Auth.User.role')=='admin'): ?>
-        <li><?= $this->Html->link(__('Modifier Ecoles Ffhtb'), ['action' => 'edit', $ecolesFfhtb->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Supprimer Ecoles Ffhtb'), ['action' => 'delete', $ecolesFfhtb->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ecolesFfhtb->id)]) ?> </li>
-        <?php endif;?>
-        <li><?= $this->Html->link(__('Liste des Ecoles Ffhtb'), ['action' => 'index']) ?> </li>
-        <?php if($this->Session->read('Auth.User.role')=='admin'): ?>
-        <li><?= $this->Html->link(__('Nouvelle Ecoles Ffhtb'), ['action' => 'add']) ?> </li>
-        <?php endif; ?>
 
-</nav>
-<div class="ecolesFfhtb view large-9 medium-8 columns content">
-    <h3><?= h($ecolesFfhtb->id) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('User') ?></th>
-            <td><?= $ecolesFfhtb->has('user') ? $this->Html->link($ecolesFfhtb->user->id, ['controller' => 'Users', 'action' => 'view', $ecolesFfhtb->user->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Nom') ?></th>
-            <td><?= h($ecolesFfhtb->nom) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Logo') ?></th>
-            <td><?= h($ecolesFfhtb->logo) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Adresse') ?></th>
-            <td><?= h($ecolesFfhtb->adresse) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Ville') ?></th>
-            <td><?= h($ecolesFfhtb->ville) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Code Postal') ?></th>
-            <td><?= h($ecolesFfhtb->code_postal) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Telephone') ?></th>
-            <td><?= h($ecolesFfhtb->telephone) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Email') ?></th>
-            <td><?= h($ecolesFfhtb->email) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Sujet') ?></th>
-            <td><?= h($ecolesFfhtb->sujet) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Site') ?></th>
-            <td><?= h($ecolesFfhtb->site) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($ecolesFfhtb->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Pays') ?></th>
-            <td><?= $this->Number->format($ecolesFfhtb->pays) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Created') ?></th>
-            <td><?= h($ecolesFfhtb->created) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Modified') ?></th>
-            <td><?= h($ecolesFfhtb->modified) ?></td>
-        </tr>
-    </table>
-    <div class="row">
-        <h4><?= __('Presentation') ?></h4>
-        <?= $this->Text->autoParagraph(h($ecolesFfhtb->presentation)); ?>
+<div class="row">
+    <div class="col-lg-12 ">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="page-header small">
+                    <div class="page-header small"><?= h($ecolesFfhtb->nom) ?>
+
+                </h1>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12">
+
+                <div class="clearfix"></div>
+                <dl class="dl-horizontal">
+                    <dt>Email</dt>
+                    <dd><?= h($ecolesFfhtb->email) ?></dd>
+                    <dt>Téléphone</dt>
+                    <dd><?= h($ecolesFfhtb->telephone) ?></dd>
+                    <dt>Site web</dt>
+                    <dd><?= h($ecolesFfhtb->site) ?></dd>
+                    <?php if (!empty($ecolesFfhtb->logo)):?>
+                    <dt>Logo</dt>
+                    <dd><?php echo $this->Html->image($ecolesFfhtb->logo,['height' => 40, 'width' => 40])?></dd>
+                    <?php endif;?>
+                    <dt>Adresse</dt>
+                    <dd><?= h($ecolesFfhtb->adresse).' ,'.h($ecolesFfhtb->ville).' ,'.h($ecolesFfhtb->code_postal).' ,'.h($ecolesFfhtb->pays) ?></dd>
+                    <?php if (!empty($ecolesFfhtb->sujet)|| !empty($ecolesFfhtb->presentation)):?>
+                    <dt>Présentation</dt>
+                    <dd><?= h($ecolesFfhtb->sujet).": ". $this->Text->autoParagraph(h($ecolesFfhtb->presentation)) ?></dd>
+                    <?php endif;?>
+                </dl>
+            </div>
+            <div class="col-lg-12 photolist">
+                <div class="row pull-right">
+                    <?= $this->Html->link(
+                        '<span class="fa fa-edit"></span>' . __(' Modifier'),
+                        ['action' => 'edit', $ecolesFfhtb->id],
+                        ['escape' => false,
+                            'class' => 'btn btn-default']
+                    ) ?>
+                    <?php  if($this->Session->read('Auth.User.id')!=$ecolesFfhtb->user_id)
+                        $this->Html->link(
+                        '<span class="fa fa-trash-o"></span>' . __(' Supprimer'),
+                        ['action' => 'edit', $ecolesFfhtb->id],
+                        ['escape' => false,
+                            'class' => 'btn btn-default',
+                            'confirm' => __('Voulez-vous supprimer l\'adhérent # {0}?', $ecolesFfhtb->id)]
+                    ) ?>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
     </div>
 </div>

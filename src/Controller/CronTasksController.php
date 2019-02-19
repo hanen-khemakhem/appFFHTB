@@ -22,8 +22,8 @@ class CronTasksController extends AppController
     }*/
     function exportPraticiensFFHTB(){
         $this->loadModel('Praticiens');
-        $controller = $this->request->getQuery('controller');
-        $action = $this->request->getQuery('action');
+        $controller = $this->request->getParam('controller');
+        $action = $this->request->getParam('action');
         $this->CronTasks->praticienJson($controller,$action);
 
     }

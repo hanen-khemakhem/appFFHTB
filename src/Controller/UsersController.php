@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use App\Controller\AppController;
+use Cake\ORM\Query;
 
 /**
  * Users Controller
@@ -37,6 +37,10 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
+        if(($user->id !=$this->Auth->user('id') && $this->Auth->user('role')=='ecole') ){
+            $this->Flash->error(__('The ecoles ffhtb could not be saved. Please, try again.'));
+            return $this->redirect(['action' => 'index']);
+        }
 
         $this->set('user', $user);
     }
@@ -74,6 +78,10 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
+        if(($user->id !=$this->Auth->user('id') && $this->Auth->user('role')=='ecole') ){
+            $this->Flash->error(__('The ecoles ffhtb could not be saved. Please, try again.'));
+            return $this->redirect(['action' => 'index']);
+        }
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
@@ -81,7 +89,7 @@ class UsersController extends AppController
                 if($user->role=='admin')
                     return $this->redirect(['action' => 'index']);
                 else
-                    return $this->redirect(['controller'=>'praticiens','action' => 'index']);
+                    return $this->redirect(['action' => 'view',$user->id]);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
@@ -98,7 +106,7 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        //$this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('The user has been deleted.'));
@@ -113,6 +121,14 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
+                if ($user['role'] == 'ecole')
+                    $user = $this->Users->find()
+                        ->select(['Users.id','Users.username','Users.role'])
+                        ->where(['Users.id' => $user['id']])
+                        ->contain(['EcolesFfhtb' => function(Query $query){
+                            return $query->enableAutoFields(true);
+                        }])
+                        ->first();
                 $this->Auth->setUser($user);
                 return $this->redirect(['controller'=>'Praticiens','action'=>'index']);
             }

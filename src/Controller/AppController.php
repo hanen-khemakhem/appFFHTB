@@ -78,6 +78,7 @@ class AppController extends Controller
     {
 
         if ((bool)($user['role'] === 'ecole')){
+
             switch ($this->request->getParam('controller')){
                 case 'EcolesFfhtb':
                     if($this->request->getParam('action')=='index' ||$this->request->getParam('action')=='edit'||$this->request->getParam('action')=='view')
@@ -87,7 +88,7 @@ class AppController extends Controller
                 case 'Praticiens':
                     return true;
                 case 'Users':
-                    if($this->request->getParam('action')=='logout')
+                    if($this->request->getParam('action')=='logout' || $this->request->getParam('action')=='login' ||$this->request->getParam('action')=='view' || $this->request->getParam('action')=='edit')
                         return true;
                     else
                         return false;

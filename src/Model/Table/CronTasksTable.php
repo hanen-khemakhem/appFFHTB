@@ -162,11 +162,9 @@ class CronTasksTable extends Table
             $tab['annuaire'][$praticien->id]['ville']=$praticien->ville;
             $tab['annuaire'][$praticien->id]['annee']=$praticien->annee_certif;
             $tab['annuaire'][$praticien->id]['pays']=$praticien->pays;
+            $tab['annuaire'][$praticien->id]['code_postal']=$praticien->codepostal;
+            $tab['annuaire'][$praticien->id]['specialite']=$praticien->specialite;
         }
-        dump(json_encode($tab));
-        die();
-
-
         file_put_contents(WWW_ROOT.'annuaires/annuaire_ffhtb.json', json_encode($tab));
 
 
