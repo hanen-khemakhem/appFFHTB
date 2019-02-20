@@ -11,6 +11,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
+ * @var \App\View\AppView $this
  */
 
 $cakeDescription = 'CakePHP: the rapid development php framework';
@@ -54,46 +55,48 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <div class="userprofile text-center">
                 <div class="userpic">
                     <img src="http://placehold.it/100x100" alt="" class="userpicimg"></div>
-                <?php if($this->Session->read('Auth.User.role')=='ecole'):?>
+                <?php if ($this->Session->read('Auth.User.role') == 'ecole'): ?>
                     <h3 class="username"><?= $this->Session->read('Auth.User.ecoles_ffhtb.nom') ?></h3>
-                    <p><?php echo $this->Session->read('Auth.User.ecoles_ffhtb.ville').', '.$this->Session->read('Auth.User.ecoles_ffhtb.pays')?></p>
-                <?php else:?>
+                    <p><?php echo $this->Session->read('Auth.User.ecoles_ffhtb.ville') . ', ' . $this->Session->read('Auth.User.ecoles_ffhtb.pays') ?></p>
+                <?php else: ?>
                     <h3 class="username"><?= $this->Session->read('Auth.User.username') ?></h3>
-                <?php endif;?>
+                <?php endif; ?>
             </div>
             <div class="clearfix"></div>
             <!-- user profile pic -->
 
             <ul class="nav" id="side-menu">
                 <!--<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>-->
-                <li><a href="javascript:void(0)" class="menudropdown"><i class="fa fa-child"></i> Adhérents <span class="badge green">2</span><span class="fa arrow"></span></a>
+                <li><a href="javascript:void(0)" class="menudropdown"><i class="fa fa-child"></i> Adhérents <span
+                                class="badge green">2</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="/praticiens/index">Liste des Adhérents</a></li>
                         <li><a href="/praticiens/add">Ajouter un Adhérent</a></li>
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
-                <?php if($this->Session->read('Auth.User.role')=='admin'): ?>
-                <li><a href="javascript:void(0)" class="menudropdown"><i class="fa fa-users"></i> Utilisateurs <span class="badge red">2</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="/users/index">Liste des utilisateurs</a></li>
-                        <li><a href="/users/add">Ajouter un utilisateur</a></li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
-                <?php endif;?>
+                <?php if ($this->Session->read('Auth.User.role') == 'admin'): ?>
+                    <li><a href="javascript:void(0)" class="menudropdown"><i class="fa fa-users"></i> Utilisateurs <span
+                                    class="badge red">2</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="/users/index">Liste des utilisateurs</a></li>
+                            <li><a href="/users/add">Ajouter un utilisateur</a></li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                <?php endif; ?>
                 <li><a href="javascript:void(0)" class="menudropdown">
                         <i class="fa fa-university"></i> Ecoles FFHTB
-                        <?php if($this->Session->read('Auth.User.role')=='admin'): ?>
-                        <span class="badge">2</span>
-                        <?php else:?>
-                        <span class="badge">1</span>
-                        <?php endif;?>
+                        <?php if ($this->Session->read('Auth.User.role') == 'admin'): ?>
+                            <span class="badge">2</span>
+                        <?php else: ?>
+                            <span class="badge">1</span>
+                        <?php endif; ?>
                         <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="/ecoles-ffhtb/index">Liste des écoles</a></li>
-                        <?php if($this->Session->read('Auth.User.role')=='admin'): ?>
-                        <li><a href="/ecoles-ffhtb/add">Ajouter une école</a></li>
+                        <?php if ($this->Session->read('Auth.User.role') == 'admin'): ?>
+                            <li><a href="/ecoles-ffhtb/add">Ajouter une école</a></li>
                         <?php endif; ?>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -115,12 +118,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                                     <img src="http://placehold.it/100x100" alt="" class="userpicimg">
                                 </span>
                                 <div class="textcontainer">
-                                    <?php if($this->Session->read('Auth.User.role')=='ecole'):?>
-                                    <h3 class="username"><?= $this->Session->read('Auth.User.ecoles_ffhtb.nom') ?></h3>
-                                    <p><?php echo $this->Session->read('Auth.User.ecoles_ffhtb.ville').', '.$this->Session->read('Auth.User.ecoles_ffhtb.pays')?></p>
-                                    <?php else:?>
-                                    <h3 class="username"><?= $this->Session->read('Auth.User.username') ?></h3>
-                                    <?php endif;?>
+                                    <?php if ($this->Session->read('Auth.User.role') == 'ecole'): ?>
+                                        <h3 class="username"><?= $this->Session->read('Auth.User.ecoles_ffhtb.nom') ?></h3>
+                                        <p><?php echo $this->Session->read('Auth.User.ecoles_ffhtb.ville') . ', ' . $this->Session->read('Auth.User.ecoles_ffhtb.pays') ?></p>
+                                    <?php else: ?>
+                                        <h3 class="username"><?= $this->Session->read('Auth.User.username') ?></h3>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <i class="caret"></i>
@@ -129,15 +132,15 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                             <li>
                                 <?= $this->Html->link(
                                     '<span class="fa fa-user"></span>' . __(' Profile Utilisateur'),
-                                    ['controller'=>'users','action' => 'view', $this->Session->read('Auth.User.id')],
-                                    ['escape' => false,'label'=>'Profile utilisateur']
+                                    ['controller' => 'users', 'action' => 'view', $this->Session->read('Auth.User.id')],
+                                    ['escape' => false, 'label' => 'Profile utilisateur']
                                 ) ?>
                             </li>
                             <li>
                                 <?= $this->Html->link(
                                     '<span class="fa fa-sign-out"></span>' . __(' Deconnexion'),
-                                    ['controller'=>'users','action' => 'logout'],
-                                    ['escape' => false,'label'=>'Deconnexion']
+                                    ['controller' => 'users', 'action' => 'logout'],
+                                    ['escape' => false, 'label' => 'Deconnexion']
                                 ) ?>
                             </li>
 
@@ -159,25 +162,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <!-- /.row -->
         <div class="row">
             <div class="col-sm-12">
-
-
-                        <?php if (!empty($this->Flash->render())) { ?>
-                            <div class="row">
-                                <div class="alert alert-warning alert-dismissable">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                                        &times;
-                                    </button>
-                                    <?= $this->Flash->render() ?>
-                                </div>
-                            </div>
-                        <?php } ?>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <?= $this->fetch('content') ?>
-                            </div>
-                        </div>
-
-
+                <?= $this->Flash->render() ?>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <?= $this->fetch('content') ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

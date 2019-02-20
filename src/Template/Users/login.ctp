@@ -9,20 +9,19 @@
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
     </title>
+    <?= $this->fetch('meta') ?>
     <?= $this->Html->meta('icon') ?>
-    <?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700')?>
-    <?php echo $this->Html->css('adminnine.css')?>
+    <?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700') ?>
 
     <!-- Bootstrap Core CSS -->
-    <?php echo $this->Html->css('bootstrap/css/bootstrap.min.css')?>
-    <!-- Morris Charts CSS -->
-    <?php echo $this->Html->css('morrisjs/morris.css')?>
-    <!-- jvectormap CSS -->
-    <?php echo $this->Html->css('jquery-jvectormap/jquery-jvectormap-2.0.3.css')?>
-    <!-- Custom CSS -->
+    <?php echo $this->Html->css('bootstrap/css/bootstrap.min.css') ?>
+    <!-- theme css -->
+    <?php echo $this->Html->css('adminnine.css') ?>
 
     <!-- Custom Fonts -->
-    <?php echo $this->Html->css('font-awesome/css/font-awesome.min.css')?>
+    <?php echo $this->Html->css('font-awesome/css/font-awesome.min.css') ?>
+
+    <?= $this->fetch('css') ?>
 </head>
 
 <body class="loginpages">
@@ -56,9 +55,14 @@
     </div>
 
 <!-- jQuery -->
-<?php echo $this->Html->script('jquery/jquery.min.js')?>
-<?php echo $this->Html->script('adminnine.js')?>
-<?php echo $this->Html->script('bootstrap/js/bootstrap.min.js')?>
+    <?php echo $this->Html->script('jquery/jquery.min.js') ?>
+
+    <!-- Bootstrap Core JavaScript -->
+    <?php echo $this->Html->script('bootstrap/js/bootstrap.min.js') ?>
+
+    <!-- js theme -->
+    <?php echo $this->Html->script('adminnine.js') ?>
+    <?= $this->fetch('script') ?>
 </body>
 </html>
 </style>
