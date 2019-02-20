@@ -7,7 +7,7 @@
  */
 ?>
 <ol class="breadcrumb">
-    <li><a href="javascript:void(0)">Home</a></li>
+    <li><a href="javascript:void(0)">Page d'accueil</a></li>
     <li class="active">Ecoles FFHTB</li>
     <li class="active">ajout</li>
 </ol>
