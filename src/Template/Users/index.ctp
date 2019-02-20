@@ -4,7 +4,11 @@
  * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
  */
 ?>
-
+<ol class="breadcrumb">
+    <li><a href="javascript:void(0)">Home</a></li>
+    <li class="active">Utilisateurs</li>
+    <li class="active">index</li>
+</ol>
 <div class="row">
     <div class="col-sm-12">
         <table class="table dataTable no-footer dtr-inline" id="dataTables-userlist" role="grid"

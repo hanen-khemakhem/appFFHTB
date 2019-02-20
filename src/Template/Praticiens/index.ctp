@@ -5,13 +5,18 @@
  */
 ?>
 
+<ol class="breadcrumb">
+    <li><a href="javascript:void(0)">Home</a></li>
+    <li class="active">Praticiens</li>
+    <li class="active">index</li>
+</ol>
 
 <div class="row">
     <div class="col-sm-12">
         <table class="table dataTable no-footer dtr-inline" id="dataTables-userlist" role="grid"
                aria-describedby="dataTables-userlist_info" style="width: 1819px;">
             <thead>
-            <tr role="row">
+            <tr role="row" class="odd">
                 <th class="sorting_asc" tabindex="0" aria-controls="dataTables-userlist" rowspan="1" colspan="1"
                     aria-sort="ascending" aria-label="User : activate to sort column descending"
                     style="width: 256px;"><?= $this->Paginator->sort('nom') ?></th>

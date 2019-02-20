@@ -5,7 +5,11 @@
  */
 ?>
 
-
+<ol class="breadcrumb">
+    <li><a href="javascript:void(0)">Home</a></li>
+    <li class="active">Ecoles FFHTB</li>
+    <li class="active">vue</li>
+</ol>
 <div class="row">
     <div class="col-lg-12 ">
         <div class="panel panel-default">

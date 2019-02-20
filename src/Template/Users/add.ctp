@@ -5,6 +5,11 @@
  * @var $userTypes
  */
 ?>
+<ol class="breadcrumb">
+    <li><a href="javascript:void(0)">Home</a></li>
+    <li class="active">Utilisateurs</li>
+    <li class="active">ajout</li>
+</ol>
 <div class="row">
 <div class="col-lg-12">
     <div class="panel panel-default">

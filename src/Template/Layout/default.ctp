@@ -46,7 +46,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <div class="navbar-header">
             <button type="button" class="navbar-toggle"><span class="sr-only">Toggle navigation</span> <span
                         class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
-            <!--<a class="navbar-brand" href="index.html">Admin9</a>--></div>
+            <a class="navbar-brand" href="/praticiens/index">Home</a></div>
         <div class="clearfix"></div>
         <div class="sidebar-nav navbar-collapse">
 
@@ -66,7 +66,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
             <ul class="nav" id="side-menu">
                 <!--<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>-->
-                <li><a href="javascript:void(0)" class="menudropdown"><i class="fa fa-child"></i> Adhérents <span class="fa arrow"></span></a>
+                <li><a href="javascript:void(0)" class="menudropdown"><i class="fa fa-child"></i> Adhérents <span class="badge green">2</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="/praticiens/index">Liste des Adhérents</a></li>
                         <li><a href="/praticiens/add">Ajouter un Adhérent</a></li>
@@ -74,7 +74,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                     <!-- /.nav-second-level -->
                 </li>
                 <?php if($this->Session->read('Auth.User.role')=='admin'): ?>
-                <li><a href="javascript:void(0)" class="menudropdown"><i class="fa fa-users"></i> Utilisateurs <span class="fa arrow"></span></a>
+                <li><a href="javascript:void(0)" class="menudropdown"><i class="fa fa-users"></i> Utilisateurs <span class="badge red">2</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="/users/index">Liste des utilisateurs</a></li>
                         <li><a href="/users/add">Ajouter un utilisateur</a></li>
@@ -82,7 +82,14 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                     <!-- /.nav-second-level -->
                 </li>
                 <?php endif;?>
-                <li><a href="javascript:void(0)" class="menudropdown"><i class="fa fa-university"></i> Ecoles FFHTB <span class="fa arrow"></span></a>
+                <li><a href="javascript:void(0)" class="menudropdown">
+                        <i class="fa fa-university"></i> Ecoles FFHTB
+                        <?php if($this->Session->read('Auth.User.role')=='admin'): ?>
+                        <span class="badge">2</span>
+                        <?php else:?>
+                        <span class="badge">1</span>
+                        <?php endif;?>
+                        <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="/ecoles-ffhtb/index">Liste des écoles</a></li>
                         <?php if($this->Session->read('Auth.User.role')=='admin'): ?>
@@ -148,11 +155,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             </div>
             <!-- /.col-lg-12 -->
         </div>
+
         <!-- /.row -->
         <div class="row">
             <div class="col-sm-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
+
+
                         <?php if (!empty($this->Flash->render())) { ?>
                             <div class="row">
                                 <div class="alert alert-warning alert-dismissable">
@@ -168,8 +176,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                                 <?= $this->fetch('content') ?>
                             </div>
                         </div>
-                    </div>
-                </div>
+
+
             </div>
         </div>
     </div>
