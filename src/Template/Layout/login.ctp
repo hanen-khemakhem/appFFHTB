@@ -24,23 +24,44 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
     </title>
-    <?= $this->Html->meta('icon') ?>
-
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('style.css') ?>
-
-
     <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
-</head>
-<body>
+    <?= $this->Html->meta('icon') ?>
+    <?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700') ?>
 
-    <?= $this->Flash->render() ?>
-    <div class="container clearfix">
-        <?= $this->fetch('content') ?>
+    <!-- Bootstrap Core CSS -->
+    <?php echo $this->Html->css('bootstrap/css/bootstrap.min.css') ?>
+    <!-- theme css -->
+    <?php echo $this->Html->css('adminnine.css') ?>
+
+    <!-- Custom Fonts -->
+    <?php echo $this->Html->css('font-awesome/css/font-awesome.min.css') ?>
+
+    <?= $this->fetch('css') ?>
+</head>
+<body class="loginpages">
+<?= $this->Flash->render() ?>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="userpic"><img src="../img/default_profile.png" alt=""></div>
+                <div class="panel-body">
+                    <?= $this->fetch('content') ?>
+                </div>
+            </div>
+        </div>
     </div>
-    <footer>
-    </footer>
-</body>
+</div>
+
+<!-- jQuery -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="../js/adminnine.js"></script>
+
+
 </html>
