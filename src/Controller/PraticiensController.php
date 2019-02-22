@@ -34,6 +34,10 @@ class PraticiensController extends AppController
      */
     public function view($id = null)
     {
+        if(!$id && empty($this->request->getData())){
+            $this->Flash->error(__('Praticien introuvable.'));
+            return $this->redirect(['action' => 'index']);
+        }
         $praticien = $this->Praticiens->get($id, [
             'contain' => []
         ]);
@@ -78,6 +82,10 @@ class PraticiensController extends AppController
      */
     public function edit($id = null)
     {
+        if(!$id && empty($this->request->getData())){
+            $this->Flash->error(__('Praticien introuvable.'));
+            return $this->redirect(['action' => 'index']);
+        }
         $praticien = $this->Praticiens->get($id, [
             'contain' => []
         ]);
