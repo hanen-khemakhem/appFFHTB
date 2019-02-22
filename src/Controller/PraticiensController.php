@@ -107,9 +107,9 @@ class PraticiensController extends AppController
         //$this->request->allowMethod(['post', 'delete']);
         $praticien = $this->Praticiens->get($id);
         if ($this->Praticiens->delete($praticien)) {
-            $this->Flash->success(__('The praticien has been deleted.'));
+            $this->Flash->success(__('Suppression avec succès.'));
         } else {
-            $this->Flash->error(__('The praticien could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Suppression impossible.'));
         }
 
         return $this->redirect(['action' => 'index']);

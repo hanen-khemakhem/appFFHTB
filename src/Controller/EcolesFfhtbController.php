@@ -42,12 +42,16 @@ class EcolesFfhtbController extends AppController
      */
     public function view($id = null)
     {
+        if(!$id && empty($this->request->getData())){
+            $this->Flash->error(__('Ecole introuvable.'));
+            return $this->redirect(['action' => 'index']);
+        }
         $this->loadModel('EcolesFfhtb');
         $ecolesFfhtb = $this->EcolesFfhtb->get($id, [
             'contain' => ['Users']
         ]);
         if(($ecolesFfhtb->user_id!=$this->Auth->user('id') && $this->Auth->user('role')=='ecole') ){
-            $this->Flash->error(__('The ecoles ffhtb could not be saved. Please, try again.'));
+            $this->Flash->error(__('Vous ne pouvez pas modifier l\'ecole.'));
             return $this->redirect(['action' => 'index']);
         }
         $this->set('ecolesFfhtb', $ecolesFfhtb);
@@ -76,7 +80,7 @@ class EcolesFfhtbController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The ecoles ffhtb could not be saved. Please, try again.'));
+            $this->Flash->error(__('Enregistrement impossible.'));
         }
         $users = $this->EcolesFfhtb->Users->find('list', ['limit' => 200]);
         $Pays = $this->EcolesFfhtb->pays;
@@ -93,13 +97,17 @@ class EcolesFfhtbController extends AppController
      */
     public function edit($id = null)
     {
+        if(!$id && empty($this->request->getData())){
+            $this->Flash->error(__('Ecole introuvable.'));
+            return $this->redirect(['action' => 'index']);
+        }
         $this->loadModel('EcolesFfhtb');
         $ecolesFfhtb = $this->EcolesFfhtb->get($id, [
             'contain' => []
         ]);
 
-        if(($ecolesFfhtb->user_id!=$this->Auth->user('id') && $this->Auth->user('role')=='ecole') ){
-            $this->Flash->error(__('The ecoles ffhtb could not be saved. Please, try again.'));
+        if(($ecolesFfhtb->user_id!=$this->Auth->user('id') && $this->Auth->user('role')=='ecole')){
+            $this->Flash->error(__('Vous ne pouvez pas modifier l\'ecole.'));
             return $this->redirect(['action' => 'index']);
         }
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -107,11 +115,11 @@ class EcolesFfhtbController extends AppController
 
 
             if ($this->EcolesFfhtb->save($ecolesFfhtb)) {
-                $this->Flash->success(__('The ecoles ffhtb has been saved.'));
+                $this->Flash->success(__('Informations sauvegardées.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The ecoles ffhtb could not be saved. Please, try again.'));
+            $this->Flash->error(__('Enregistrement impossible.'));
         }
         $Pays = $this->EcolesFfhtb->pays;
         $users = $this->EcolesFfhtb->Users->find('list', ['limit' => 200]);
@@ -135,9 +143,9 @@ class EcolesFfhtbController extends AppController
             return $this->redirect(['action' => 'index']);
         }
         if ($this->EcolesFfhtb->delete($ecolesFfhtb)) {
-            $this->Flash->success(__('The ecoles ffhtb has been deleted.'));
+            $this->Flash->success(__('Ecole ffhtb supprimée.'));
         } else {
-            $this->Flash->error(__('The ecoles ffhtb could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Supression impssible'));
         }
 
         return $this->redirect(['action' => 'index']);

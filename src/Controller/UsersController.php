@@ -38,7 +38,7 @@ class UsersController extends AppController
             'contain' => []
         ]);
         if(($user->id !=$this->Auth->user('id') && $this->Auth->user('role')=='ecole') ){
-            $this->Flash->error(__('The ecoles ffhtb could not be saved. Please, try again.'));
+            $this->Flash->error(__('Vous n\'avez pas le droit de voir cet utilisateur. '));
             return $this->redirect(['action' => 'index']);
         }
 
@@ -56,11 +56,11 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('Utilisateur enregistré'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('Enregistrement impossible.'));
         }
         $this->set(compact('user'));
         $this->set('userTypes',$this->Users->types);
@@ -75,23 +75,27 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
+        if(!$id && empty($this->request->getData())){
+            $this->Flash->error(__('Utilisateur introuvable.'));
+            return $this->redirect(['action' => 'index']);
+        }
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
         if(($user->id !=$this->Auth->user('id') && $this->Auth->user('role')=='ecole') ){
-            $this->Flash->error(__('The ecoles ffhtb could not be saved. Please, try again.'));
+            $this->Flash->error(__('Vous n\'avez pas le droit de modifier l\'utilisateur' ));
             return $this->redirect(['action' => 'index']);
         }
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('Utilisateur sauvegardé.'));
                 if($user->role=='admin')
                     return $this->redirect(['action' => 'index']);
                 else
                     return $this->redirect(['action' => 'view',$user->id]);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('Enregistrement imossible'));
         }
         $this->set(compact('user'));
         $this->set('userTypes',$this->Users->types);
@@ -109,9 +113,9 @@ class UsersController extends AppController
         //$this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->Flash->success(__('Utilisateur supprimé avec succès.'));
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Suppression impossible.'));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -132,12 +136,6 @@ class UsersController extends AppController
                 $this->Auth->setUser($user);
                 return $this->redirect(['controller'=>'Praticiens','action'=>'index']);
             }
-            /*$this->Flash->set(
-                __('Votre identifiant ou votre mot de passe est incorrect.', true),
-                array(
-                    'element' => 'growl'
-                )
-            );*/
             $this->Flash->error(__('Votre identifiant ou votre mot de passe est incorrect'));
         }
 
