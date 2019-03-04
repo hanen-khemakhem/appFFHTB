@@ -157,15 +157,19 @@ class CronTasksTable extends Table
         foreach ($praticiens as $k => $praticien){
 
             $tab['annuaire'][$praticien->id]['nomPrenom']=$praticien->nom;
-            $tab['annuaire'][$praticien->id]['adresse']=$praticien->adresse;
+            $tab['annuaire'][$praticien->id]['adresse']=$praticien->adresse.'<br>'.$praticien->codepostal.'<br>'.$praticien->ville;
             $tab['annuaire'][$praticien->id]['formation']=$praticien->niveau;
             $tab['annuaire'][$praticien->id]['ville']=$praticien->ville;
+            $tab['annuaire'][$praticien->id]['tel']=$praticien->telephone;
+            $tab['annuaire'][$praticien->id]['email']=$praticien->email;
+            $tab['annuaire'][$praticien->id]['specialite']=$praticien->specialite;
             $tab['annuaire'][$praticien->id]['annee']=$praticien->annee_certif;
             $tab['annuaire'][$praticien->id]['pays']=$praticien->pays;
-            $tab['annuaire'][$praticien->id]['code_postal']=$praticien->codepostal;
-            $tab['annuaire'][$praticien->id]['specialite']=$praticien->specialite;
         }
-        file_put_contents(WWW_ROOT.'annuaires/annuaire_ffhtb.json', json_encode($tab));
+        $tab= "var data = " . json_encode($tab);
+        dump($tab);
+        die();
+        file_put_contents(WWW_ROOT.'annuaires/annuaire_ffhtb.json', $tab);
 
 
         $path = "/web/wp-content/plugins/psyclick/data/";
