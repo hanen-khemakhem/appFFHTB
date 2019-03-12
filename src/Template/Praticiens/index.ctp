@@ -18,6 +18,7 @@
     <div class="col-sm-12">
         <table class="table dataTable no-footer dtr-inline" id="dataTables-userlist" role="grid"
                aria-describedby="dataTables-userlist_info" style="width: 1819px;">
+            <?php if(!empty($praticiens)):?>
             <thead>
             <tr role="row" class="odd">
                 <th class="sorting_asc" tabindex="0" aria-controls="dataTables-userlist" rowspan="1" colspan="1"
@@ -79,6 +80,9 @@
                 </tr>
             <?php endforeach; ?>
             </tbody>
+            <?php else:?>
+                <?php echo 'Aucune donnée disponible ';?>
+            <?php endif;?>
         </table>
     </div>
 </div>
