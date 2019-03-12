@@ -67,11 +67,11 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
             <ul class="nav" id="side-menu">
                 <!--<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>-->
-                <li><a href="javascript:void(0)" class="menudropdown"><i class="fa fa-child"></i> Adhérents <span
+                <li><a href="javascript:void(0)" class="menudropdown"><i class="fa fa-child"></i> Praticiens <span
                                 class="badge green">2</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="/praticiens/index">Liste des Adhérents</a></li>
-                        <li><a href="/praticiens/add">Ajouter un Adhérent</a></li>
+                        <li><a href="/praticiens/index">Liste des Praticiens</a></li>
+                        <li><a href="/praticiens/add">Ajouter un Praticien</a></li>
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>

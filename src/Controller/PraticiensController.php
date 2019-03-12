@@ -34,7 +34,7 @@ class PraticiensController extends AppController
      */
     public function view($id = null)
     {
-        if(!$id && empty($this->request->getData())){
+        if(!$id){
             $this->Flash->error(__('Praticien introuvable.'));
             return $this->redirect(['action' => 'index']);
         }
@@ -82,7 +82,7 @@ class PraticiensController extends AppController
      */
     public function edit($id = null)
     {
-        if(!$id && empty($this->request->getData())){
+        if(!$id || empty($this->request->getData())){
             $this->Flash->error(__('Praticien introuvable.'));
             return $this->redirect(['action' => 'index']);
         }
@@ -112,6 +112,10 @@ class PraticiensController extends AppController
      */
     public function delete($id = null)
     {
+        if(!$id){
+            $this->Flash->error(__('Praticien introuvable.'));
+            return $this->redirect(['action' => 'index']);
+        }
         //$this->request->allowMethod(['post', 'delete']);
         $praticien = $this->Praticiens->get($id);
         if ($this->Praticiens->delete($praticien)) {

@@ -42,14 +42,12 @@ class EcolesFfhtbController extends AppController
      */
     public function view($id = null)
     {
-        if(!$id && empty($this->request->getData())){
+        if(!$id){
             $this->Flash->error(__('Ecole introuvable.'));
             return $this->redirect(['action' => 'index']);
         }
         $this->loadModel('EcolesFfhtb');
-        $ecolesFfhtb = $this->EcolesFfhtb->get($id, [
-            'contain' => ['Users']
-        ]);
+        $ecolesFfhtb = $this->EcolesFfhtb->get($id);
         if(($ecolesFfhtb->user_id!=$this->Auth->user('id') && $this->Auth->user('role')=='ecole') ){
             $this->Flash->error(__('Vous ne pouvez pas modifier l\'ecole.'));
             return $this->redirect(['action' => 'index']);
@@ -97,7 +95,7 @@ class EcolesFfhtbController extends AppController
      */
     public function edit($id = null)
     {
-        if(!$id && empty($this->request->getData())){
+        if(!$id || empty($this->request->getData())){
             $this->Flash->error(__('Ecole introuvable.'));
             return $this->redirect(['action' => 'index']);
         }
@@ -135,6 +133,10 @@ class EcolesFfhtbController extends AppController
      */
     public function delete($id = null)
     {
+        if(!$id){
+            $this->Flash->error(__('Ecole introuvable.'));
+            return $this->redirect(['action' => 'index']);
+        }
         $this->loadModel('EcolesFfhtb');
         //$this->request->allowMethod(['post', 'delete']);
         $ecolesFfhtb = $this->EcolesFfhtb->get($id);

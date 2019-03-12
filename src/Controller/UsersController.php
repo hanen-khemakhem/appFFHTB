@@ -34,6 +34,10 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
+        if(!$id){
+            $this->Flash->error(__('Utilisateur introuvable.'));
+            return $this->redirect(['action' => 'index']);
+        }
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
@@ -75,7 +79,7 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
-        if(!$id && empty($this->request->getData())){
+        if(!$id || empty($this->request->getData())){
             $this->Flash->error(__('Utilisateur introuvable.'));
             return $this->redirect(['action' => 'index']);
         }
@@ -110,6 +114,10 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
+        if(!$id){
+            $this->Flash->error(__('Utilisateur introuvable.'));
+            return $this->redirect(['action' => 'index']);
+        }
         //$this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
