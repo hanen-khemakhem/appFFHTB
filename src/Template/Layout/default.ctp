@@ -54,7 +54,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <!-- user profile pic -->
             <div class="userprofile text-center">
                 <div class="userpic">
-                    <img src="/img/user.png" alt="" class="userpicimg"></div>
+                    <img src="/img/user1.png" alt="" class="userpicimg"></div>
                 <?php if ($this->Session->read('Auth.User.role') == 'ecole'): ?>
                     <h3 class="username"><?= $this->Session->read('Auth.User.ecoles_ffhtb.nom') ?></h3>
                     <p><?php echo $this->Session->read('Auth.User.ecoles_ffhtb.ville') . ', ' . $this->Session->read('Auth.User.ecoles_ffhtb.pays') ?></p>
@@ -115,7 +115,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                         <a class="dropdown-toggle userdd" data-toggle="dropdown" href="javascript:void(0)">
                             <div class="userprofile small ">
                                 <span class="userpic">
-                                    <img src="/img/user.png" alt="" class="userpicimg">
+                                    <img src="/img/user1.png" alt="" class="userpicimg">
                                 </span>
                                 <div class="textcontainer">
                                     <?php if ($this->Session->read('Auth.User.role') == 'ecole'): ?>
