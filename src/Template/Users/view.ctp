@@ -10,6 +10,7 @@
     <li class="active">Utilisateurs</li>
     <li class="active">vue</li>
 </ol>
+
 <div class="row">
 <div class="col-lg-12 ">
     <div class="panel panel-default">
@@ -50,6 +51,9 @@
                         'confirm' => __('Voulez-vous supprimer l\'utilisateur # {0}?', $user->id)]
                 ) ?>
 
+            </div>
+            <div class="row pull-left">
+                <a class="btn btn-info" href="/users/index"><i class="fa fa-list"></i> liste des utilisateurs</a>
             </div>
         </div>
         <div class="clearfix"></div>

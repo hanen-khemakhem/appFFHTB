@@ -9,6 +9,11 @@
     <li class="active">Utilisateurs</li>
     <li class="active">index</li>
 </ol>
+<?php if($this->Session->read('Auth.User.role')=='admin'):?>
+    <div class="text-right">
+        <a class="btn btn-info" href="/users/add"><i class="fa fa-plus-circle"></i> Créer un nouveau utilisateur</a>
+    </div>
+<?php endif; ?>
 <div class="row">
     <div class="col-sm-12">
         <table class="table dataTable no-footer dtr-inline" id="dataTables-userlist" role="grid"

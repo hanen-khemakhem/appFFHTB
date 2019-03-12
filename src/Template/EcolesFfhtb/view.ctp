@@ -60,6 +60,9 @@
                     ) ?>
 
                 </div>
+                <div class="row pull-left">
+                    <a class="btn btn-info" href="/ecoles-ffhtb/index"><i class="fa fa-list"></i> liste des écoles</a>
+                </div>
             </div>
             <div class="clearfix"></div>
         </div>

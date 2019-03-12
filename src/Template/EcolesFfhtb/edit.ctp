@@ -11,10 +11,13 @@
     <li class="active">Ecoles FFHTB</li>
     <li class="active">modification</li>
 </ol>
+<div class="text-right">
+    <a class="btn btn-info" href="/ecoles-ffhtb/index"><i class="fa fa-list"></i> Liste des écoles</a>
+</div>
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading"> Ajouter une Ecole </div>
+            <div class="panel-heading"> Modifier l'Ecole </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">

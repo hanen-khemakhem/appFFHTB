@@ -9,12 +9,14 @@
     <li class="active">Praticiens</li>
     <li class="active">vue</li>
 </ol>
+
 <div class="row">
     <div class="col-lg-12 ">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h1 class="page-header small">
-                    <div class="page-header small"><?= h($praticien->nom) ?>
+                    <div class="page-header small"><?= h($praticien->nom) ?></div>
+
 
                 </h1>
             </div>
@@ -51,6 +53,9 @@
                             'confirm' => __('Voulez-vous supprimer l\'adhérent # {0}?', $praticien->id)]
                     ) ?>
 
+                </div>
+                <div class="row pull-left">
+                    <a class="btn btn-info" href="/praticiens/index"><i class="fa fa-list"></i> liste des praticiens</a>
                 </div>
             </div>
             <div class="clearfix"></div>

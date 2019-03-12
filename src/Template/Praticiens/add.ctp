@@ -11,6 +11,9 @@
     <li class="active">Praticiens</li>
     <li class="active">ajout</li>
 </ol>
+<div class="text-right">
+    <a class="btn btn-info" href="/praticiens/index"><i class="fa fa-list"></i> Liste des praticiens</a>
+</div>
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">

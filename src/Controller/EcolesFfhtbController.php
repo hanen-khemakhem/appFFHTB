@@ -95,7 +95,7 @@ class EcolesFfhtbController extends AppController
      */
     public function edit($id = null)
     {
-        if(!$id || empty($this->request->getData())){
+        if(!$id ){
             $this->Flash->error(__('Ecole introuvable.'));
             return $this->redirect(['action' => 'index']);
         }

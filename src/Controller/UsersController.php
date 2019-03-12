@@ -79,7 +79,7 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
-        if(!$id || empty($this->request->getData())){
+        if(!$id){
             $this->Flash->error(__('Utilisateur introuvable.'));
             return $this->redirect(['action' => 'index']);
         }

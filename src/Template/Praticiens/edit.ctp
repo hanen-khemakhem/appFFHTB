@@ -11,10 +11,13 @@
     <li class="active">Praticiens</li>
     <li class="active">modification</li>
 </ol>
+<div class="text-right">
+    <a class="btn btn-info" href="/praticiens/index"><i class="fa fa-list"></i> Liste des praticiens</a>
+</div>
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading"> Modifier l'Adhérent </div>
+            <div class="panel-heading"> Modifier le praticien </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">

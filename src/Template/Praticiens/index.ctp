@@ -10,7 +10,10 @@
     <li class="active">Praticiens</li>
     <li class="active">index</li>
 </ol>
-
+<div class="text-right">
+    <a class="btn btn-info" href="/praticiens/add"><i class="fa fa-plus-circle"></i> Créer un nouveau
+        praticien</a>
+</div>
 <div class="row">
     <div class="col-sm-12">
         <table class="table dataTable no-footer dtr-inline" id="dataTables-userlist" role="grid"

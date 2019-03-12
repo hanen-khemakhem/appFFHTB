@@ -82,7 +82,7 @@ class PraticiensController extends AppController
      */
     public function edit($id = null)
     {
-        if(!$id || empty($this->request->getData())){
+        if(!$id){
             $this->Flash->error(__('Praticien introuvable.'));
             return $this->redirect(['action' => 'index']);
         }
