@@ -42,7 +42,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
 <body>
 <!-- loader -->
-<div class="loader"><h1 class="loadingtext">chagremant de la page</h1><img src="/img/loader2.gif" alt=""> </div>
+<div class="loader"><h4 class="loadingtext">chagremant de la page</h4><img src="/img/loader2.gif" alt=""> </div>
 <!-- loader ends -->
 
 <div id="wrapper">
