@@ -69,7 +69,9 @@ class PraticienShell extends Shell
         $tmp = WWW_ROOT.'annuaires/annuaire_ffhtb.json';
 
         @ftp_delete($conn_id, $path."annuaire1_ffhtb.json");
-        ftp_put($conn_id, $path."annuaire1_ffhtb.json", $tmp, FTP_BINARY);
-        $this->out($this->OptionParser->help());
+        if(ftp_put($conn_id, $path."annuaire1_ffhtb.json", $tmp, FTP_BINARY))
+         $this->out('C\'est bon');
+        else
+            $this->out('Ko');
     }
 }
