@@ -1,5 +1,3 @@
 #!/bin/sh
-TERM=linux
-main TERM
-cd /var/www/gestion.ffhtb.fr/appFFHTB
-cake/console/cake praticien
+cd /d c:/wamp64/www/appFFHTB/bin
+cake praticien

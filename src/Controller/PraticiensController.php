@@ -147,7 +147,7 @@ class PraticiensController extends AppController
             if (!$prat) {
                 $praticien = $this->Praticiens->newEntity();
                 $array = array();
-                $praticien->user_id=null;
+                $praticien->user_id=$this->Auth->user('id');
                 $praticien->codepostal=null;
                 $praticien->in_annuaire=1;
                     $praticien->nom = $value->nomPrenom;
