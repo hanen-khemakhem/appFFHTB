@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use Cake\ORM\Query;
@@ -34,14 +35,14 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
-        if(!$id){
+        if (!$id) {
             $this->Flash->error(__('Utilisateur introuvable.'));
             return $this->redirect(['action' => 'index']);
         }
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
-        if(($user->id !=$this->Auth->user('id') && $this->Auth->user('role')=='ecole') ){
+        if (($user->id != $this->Auth->user('id') && $this->Auth->user('role') == 'ecole')) {
             $this->Flash->error(__('Vous n\'avez pas le droit de voir cet utilisateur. '));
             return $this->redirect(['action' => 'index']);
         }
@@ -67,7 +68,7 @@ class UsersController extends AppController
             $this->Flash->error(__('Enregistrement impossible.'));
         }
         $this->set(compact('user'));
-        $this->set('userTypes',$this->Users->types);
+        $this->set('userTypes', $this->Users->types);
     }
 
     /**
@@ -79,30 +80,30 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
-        if(!$id){
+        if (!$id) {
             $this->Flash->error(__('Utilisateur introuvable.'));
             return $this->redirect(['action' => 'index']);
         }
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
-        if(($user->id !=$this->Auth->user('id') && $this->Auth->user('role')=='ecole') ){
-            $this->Flash->error(__('Vous n\'avez pas le droit de modifier l\'utilisateur' ));
+        if (($user->id != $this->Auth->user('id') && $this->Auth->user('role') == 'ecole')) {
+            $this->Flash->error(__('Vous n\'avez pas le droit de modifier l\'utilisateur'));
             return $this->redirect(['action' => 'index']);
         }
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('Utilisateur sauvegardé.'));
-                if($user->role=='admin')
+                if ($user->role == 'admin')
                     return $this->redirect(['action' => 'index']);
                 else
-                    return $this->redirect(['action' => 'view',$user->id]);
+                    return $this->redirect(['action' => 'view', $user->id]);
             }
             $this->Flash->error(__('Enregistrement imossible'));
         }
         $this->set(compact('user'));
-        $this->set('userTypes',$this->Users->types);
+        $this->set('userTypes', $this->Users->types);
     }
 
     /**
@@ -114,7 +115,7 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
-        if(!$id){
+        if (!$id) {
             $this->Flash->error(__('Utilisateur introuvable.'));
             return $this->redirect(['action' => 'index']);
         }
@@ -128,6 +129,7 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
     public function login()
     {
         if ($this->request->is('post')) {
@@ -135,20 +137,24 @@ class UsersController extends AppController
             if ($user) {
                 if ($user['role'] == 'ecole')
                     $user = $this->Users->find()
-                        ->select(['Users.id','Users.username','Users.role'])
+                        ->select(['Users.id', 'Users.username', 'Users.role'])
                         ->where(['Users.id' => $user['id']])
-                        ->contain(['EcolesFfhtb' => function(Query $query){
+                        ->contain(['EcolesFfhtb' => function (Query $query) {
                             return $query->enableAutoFields(true);
                         }])
                         ->first();
                 $this->Auth->setUser($user);
-                return $this->redirect(['controller'=>'Praticiens','action'=>'index']);
+                if (!empty($this->referer()))
+                    return $this->redirect($this->referer());
+                else
+                    return $this->redirect(['controller' => 'Praticiens', 'action' => 'index']);
             }
             $this->Flash->error(__('Votre identifiant ou votre mot de passe est incorrect'));
         }
 
         $this->viewBuilder()->setLayout('login');
     }
+
     public function logout()
     {
         $this->viewBuilder()->setLayout('login');
